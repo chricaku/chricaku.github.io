@@ -480,7 +480,8 @@
       
         <hr>
 <p>最近开始玩博客next 5.1.7 旧版版本<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/UPDATE-FROM-5.1.X.md" target="_blank" rel="noopener"> NexT v5.1.x 更新</a><br>，后面运行 hexo g 的时候老提示我升级，有强迫症的我又重新搭建了一下博客，升级到nexT主题更新到6.3.0备忘！！！下面是对hexo、nexT的配置文件进行详细的记录。这次准备把所用到的各个字段都进行记录，便于以后出现意外情况再次重建。<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">hexo-theme-next</a></p>
-<p>Ps：每篇文章还弄了摘要格式！好累~~<br><a id="more"></a></p>
+<p>Ps：每篇文章还弄了摘要格式！好累~~<br><a id="more"></a><br>文章有点长来首音乐舒舒压</p>
+<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=569212281&auto=0&height=66"></iframe></p>
 <hr>
 <h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><h2 id="语言设置"><a href="#语言设置" class="headerlink" title="语言设置"></a>语言设置</h2><p>每个主题都会配置几种界面显示语言，修改语言只要编辑站点配置文件，找到 <code>language</code> 字段，并将其值更改为你所需要的语言(例如，简体中文)：</p>
 <p><code>language: zh-CN</code></p>
@@ -935,7 +936,7 @@ version: false
   tab_replace:
 </code></pre><p>再到主题目录设置_config.yml</p>
 <pre><code>highlight_theme: normal
-</code></pre><h1 id="数学代码设置"><a href="#数学代码设置" class="headerlink" title="数学代码设置"></a>数学代码设置</h1><p>通过将主题 <code>_config.yml</code> 文件中搜索 <code>math</code> 选项<code>enable</code>设为 <code>true</code> 来打开。</p>
+</code></pre><h1 id="数学代码设置"><a href="#数学代码设置" class="headerlink" title="数学代码设置"></a>数学代码设置</h1><p>Next主题中已集成<code>hexo-renderer-marked</code>插件，直接通过将主题 <code>_config.yml</code> 文件中搜索 <code>math</code> 选项<code>enable</code>设为 <code>true</code> 来打开方可。</p>
 <pre><code>math:
   enable: true 
 
@@ -943,6 +944,13 @@ version: false
   # That is it only render those page who has &apos;mathjax: true&apos; in Front Matter.
   # If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.
   per_page: true
+</code></pre><p>别着急，这样还不够，还需要在文章的Front-matter里打开mathjax开关，如下：</p>
+<pre><code>---
+title: index.html
+date: 2018-07-23 21:01:30
+tags:
+mathjax: true
+--
 </code></pre><h1 id="参考博客："><a href="#参考博客：" class="headerlink" title="参考博客："></a>参考博客：</h1><ol>
 <li><p><a href="http://shenzekun.cn/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B.html" target="_blank" rel="noopener">hexo的next主题个性化教程:打造炫酷网站</a></p>
 </li>
@@ -1231,7 +1239,7 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">15k</span>
+    <span title="站点总字数">16k</span>
   
 
   
