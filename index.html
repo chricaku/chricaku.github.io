@@ -1007,7 +1007,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-07 09:24:11" itemprop="dateModified" datetime="2018-08-07T09:24:11+08:00">2018-08-07</time>
+                <time title="修改时间：2018-08-07 11:56:36" itemprop="dateModified" datetime="2018-08-07T11:56:36+08:00">2018-08-07</time>
               
             
           </span>
@@ -2084,11 +2084,11 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
             counter.fetchWhenSave(true);
             counter.increment("time");
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text(counter.get('time'));
-            
             counter.save(null, {
               success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
                 
               },
               error: function(counter, error) {
