@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AppStore_iTunes_旧版App抓包]]></title>
+    <url>%2F2018%2F09%2F25%2FAppStore-iTunes-%E6%97%A7%E7%89%88App%E6%8A%93%E5%8C%85%2F</url>
+    <content type="text"><![CDATA[我们不得不说有些软件应用的版本越新，使用感越差！ 前言 从 iTunes 12.7 开始，Apple 去掉了 App Store 功能，也就无法在电脑上下载和管理 App 安装包，非常不方便。 之后 Apple 又出了 iTunes 12.6.3 特殊版本，重新加入了从 App Store 功能，可以下载和管理各个App的 ipa 安装包。 目前 iTunes 12.6.3 又更新至 iTunes 12.6.5 版本，也有App Store 功能。 查询APP版本号和ID: https://tools.lancely.tech/apple/app-historyiTunes iTunes 12.6.5 macOS：官网地址,点击下载 Windows 64 bit：官网地址,点击下载 Windows 32 bit：官网地址,点击下载iTunes 12.6.4 macOS：官网地址,点击下载 Windows 64 bit：官网地址,点击下载 Windows 32 bit：官网地址,点击下载iTunes 12.6.3 macOS：官网地址,点击下载 Windows 64 bit：官网地址,点击下载 Windows 32 bit：官网地址,点击下载 Fiddler 官网下载 https://www.telerik.com/fiddler 简单的步骤: Fidder 开启 HTTPS 抓包功能. 设置拦截关键字: [ bpu MZBuy.woa/wa/bayProduct ]. 在iTunes中登陆你的Apple ID并搜索想要下载的APP. 在iTunes中点击 获取 . 在Fidder中看到有个被拦截的请求,定位到STRING字段,修改成想要- 的版本的ID号并放行. 待下载完,从iTunes安装至手机即可. 备注 如何去除旧版本app store更新提醒 修改电脑上ipa后缀名为zip，打开删除里面的“iTunesMetadata.plist”文件； 后缀改回.ipa，使用助手安装。 存到云盘使用 捷径Shortcut安装（原Workflow） IOS常用旧版软件ID整理分享 详情见：https://www.jianshu.com/p/5a28dacba975]]></content>
+      <categories>
+        <category>Apple</category>
+      </categories>
+      <tags>
+        <tag>iTunes</tag>
+        <tag>App Store</tag>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[OpenConnect-ocserv]]></title>
+    <url>%2F2018%2F09%2F25%2FOpenConnect-ocserv%2F</url>
+    <content type="text"><![CDATA[为了能够获取知识，满足对知识的渴望，科学上网必不可少，这是另一种选择？本文来源：Vicer https://moeclub.org/2017/04/15/130/本文仅做记录 特点: 支持各种加速; 支持纯TCP模式; 支持TCP,UDP混合模式; 支持用户分组; 支持路由表分流; 支持用户组区分路由表; 支持休眠,断线重连; 支持各种验证方式; 安装平台不受限制的; 原生支持各种客户端:Windows, WindosPhone, macOS, iPhone, Android, OpenWRT… 最重要的就是:稳! 环境要求以下步骤在 Debian 7 和 Debian 8 下均通过测试.已重新编译安装包,路由表已增加至200条. 为了能顺利安装,请参照 为Debian更换智能的源 更新源. 下载必要安装包: i386: 12wget --no-check-certificate -qO '/tmp/libradcli4_1.2.6-3~bpo8+1_i386.deb' 'https://moeclub.org/attachment/DebianPackage/ocserv/libradcli4_1.2.6-3~bpo8+1_i386.deb'wget --no-check-certificate -qO '/tmp/ocserv_0.11.6-1~bpo8+2_i386.deb' 'https://moeclub.org/attachment/DebianPackage/ocserv/ocserv_0.11.6-1~bpo8+2_i386.deb' amd64: 12wget --no-check-certificate -qO '/tmp/libradcli4_1.2.6-3~bpo8+1_amd64.deb' 'https://moeclub.org/attachment/DebianPackage/ocserv/libradcli4_1.2.6-3~bpo8+1_amd64.deb'wget --no-check-certificate -qO '/tmp/ocserv_0.11.6-1~bpo8+2_amd64.deb' 'https://moeclub.org/attachment/DebianPackage/ocserv/ocserv_0.11.6-1~bpo8+2_amd64.deb' 从源安装依赖: 请确保已添加jessie源,并已经完成更新. 1DEBIAN_FRONTEND=noninteractive apt-get install -y -t jessie dbus init-system-helpers libc6 libev4 libgnutls-deb0-28 libgssapi-krb5-2 libhttp-parser2.1 liblz4-1 libnettle4 libnl-3-200 libnl-route-3-200 liboath0 libopts25 libpcl1 libprotobuf-c1 libsystemd0 libtalloc2 gnutls-bin ssl-cert 安装必要依赖: 1dpkg -i /tmp/libradcli4_*.deb 安装 ocserv: 1dpkg -i /tmp/ocserv_*.deb 配置参数/etc/ocserv/ocserv.conf 过程比较繁杂,请保持耐心. 如果出现报错,请检查是否有遗漏步骤. 参考: 配置 ocserv.conf 用于证书登录. 开启IPv4转发 12sed -i '/net.ipv4.ip_forward.*/d;$a\net.ipv4.ip_forward = 1' /etc/sysctl.confsysctl -p 配置防火墙 123456sed -i '/exit .*/d' /etc/rc.localsed -i '$a\iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE' /etc/rc.localsed -i '$a\iptables -I INPUT -p tcp --dport 443 -j ACCEPT' /etc/rc.localsed -i '$a\iptables -I INPUT -p udp --dport 443 -j ACCEPT' /etc/rc.localsed -i '$a\iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu' /etc/rc.localsed -i '$a\exit 0' /etc/rc.local 重启 1reboot 调试 12bash /etc/init.d/ocserv stopocserv -c /etc/ocserv/ocserv.conf -f -d 1 注意事项: 如遇安装报错请尝试以下命令: 1apt-get -f install -y 客户端下载:注：Cisco发布了新版的AnyConnect APP，原有APP已更名为Cisco Legacy Anyconnect，下载新版即可。 Windos:anyconnect-win-4.2.04018-pre-deploy-k9.msi Linux:anyconnect-linux64-4.4.01054-predeploy-k9.tar.gz macOS:anyconnect-macosx-i386-4.2.04018-k9.dmg Android:com.cisco.anyconnect.vpn.android.avf-4.0.05062.apk Android(推荐):app.openconnect_1119.apk ProfileEditor:tools-anyconnect-win-4.4.01054-profileeditor-k9.msi WindowsPhone:AnyConnect iPhone:AnyConnect]]></content>
+      <categories>
+        <category>Network</category>
+      </categories>
+      <tags>
+        <tag>Cisco</tag>
+        <tag>ocserv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Docker入门]]></title>
+    <url>%2F2018%2F08%2F16%2FDocker%E5%85%A5%E9%97%A8%2F</url>
+    <content type="text"><![CDATA[新项目与原项目使用环境不符，又要建立新的服务器，环境搭建繁琐，这时候Docker的优势就出来了。 官方描述Docker是一个开放源代码软件项目，让应用程序布署在软件容器下的工作可以自动化进行，借此在Linux操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。Docker利用Linux核心中的资源分脱机制，例如cgroups，以及Linux核心名字空间，来创建独立的软件容器。 Docker通常用于如下场景： web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或其他的后台应用； 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。 官方入门教程https://docs.docker.com/get-started/ 支持平台桌面 Platform x86_64 Docker for Mac (macOS) yes Docker for Windows (Microsoft Windows 10) yes 服务器 Platform x86_64/amd64 ARM ARM64 / AARCH64 IBM Power (ppc64le) IBM Z (s390x) CentOS yes yes Debian yes yes yes Fedora yes Ubuntu yes yes yes yes yes 基本操作 本文以 Debian/Ubuntu 操作系统作为参考 中国环境需要换源（不换源可能无法下载或下载极慢）安装docker.io包之前，需要先设置使用backports源编辑 /etc/apt/sources.list 文件，加入下面这一句： deb http://http.debian.net/debian jessie-backports main 安装docker docker.io包安装确保已经按照第一步的操作步骤添加了backports源，然后执行下面的命令。 $ sudo apt-get update $ sudo apt-get install docker.io 确认docker运行是否正常。 $ sudo docker run --rm hello-world 查看docker版本 $ docker version 官方的安装脚本一键安装 执行脚本方法如下： wget -qO- get.docker.com | bash 安装完成后，运行下面的命令，验证是否安装成功。 docker version 启动 Docker systemctl start docker 查看 Docker 启动状态 systemctl status docker 允许 Docker 开机自启 systemctl enable docker Debian 如何删除docker? Debian系统下面删除docker，要按照下面几个步骤来删除。 使用purge命令清除docker-io包。 $ sudo apt-get purge docker-io 或者用autoremove命令将不再使用的依赖的包删除掉。 $ sudo apt-get autoremove --purge docker-io 需要注意的是上面的命令只是删除了docker.io包，并不会删除下载的镜像，产生的容器文件，卷，已经用户创建的配置文件。如果你觉得不爽，可以用下面的命令干掉它们： $ rm -rf /var/lib/docker 然后手工删除创建的配置文件。 备注：docker这个名字已经被占用了，所以debian下面的docker的包的名字是docker.io。 常规卸载/删除 docker apt-get list installed | grep docker 查看 安装的docker内容 apt-get -y remove docker-* 删除安装的 docker 内容 部署服务拉取镜像docker pull ## docker pull teddysun/shadowsocks-libev 查询某个镜像docker search $name ## docker search redis 检查运行中的镜像 使用docker ps命令可以查看所有正在运行中的容器列表， docker ps 或者 docker ps -l docker images 使用docker inspect命令我们可以查看更详细的关于某一个容器的信息。 docker inspect Recap and cheat sheet ## List Docker CLI commands docker docker container --help ## Display Docker version and info docker --version docker version docker info ## Execute Docker image docker run hello-world ## List Docker images docker image ls ## List Docker containers (running, all, all in quiet mode) docker container ls docker container ls --all docker container ls -aq 创建配置文件略 启动容器如范例中，定义的端口是 9000，那么在启动容器时就需要将 9000 端口映射到宿主机的对外端口上。启动命令： docker run -d -p 9000:9000 -p 9000:9000/udp --name ss-libev -v /etc/shadowsocks-libev:/etc/shadowsocks-libev teddysun/shadowsocks-libev docker run：开始运行一个容器。 -d 参数：容器以后台运行并输出容器 ID。 -p 参数：容器的 9000 端口映射到本机的 9000 端口。默认是映射 TCP，当需要映射 UDP 时，那就再追加一次 UDP 的映射。冒号后面是容器端口，冒号前面是宿主机端口，可以写成一致，也可以不一致。 –name 参数：给容器分配一个识别符，方便将来的启动，停止，删除等操作。 -v 参数：挂载卷(volume)，冒号后面是容器的路径，冒号前面是宿主机的路径，可以写成一致，也可以不一致。 teddysun/shadowsocks-libev：这是拉取回来的镜像路径。 当然，这里也可以启动 Tag 为 alpine 的镜像命令： docker run -d -p 9000:9000 -p 9000:9000/udp --name ss-libev -v /etc/shadowsocks-libev:/etc/shadowsocks-libev teddysun/shadowsocks-libev:alpine 注意：此处仅作为演示，不能同时执行上面的这两个启动命令，因为端口都是 9000，产生冲突了。 停止容器利用如下命令可以停止正在运行中的容器： docker stop $name 此处的 $name 就是在启动容器那一步定义的容器的识别符 启动容器利用如下命令可以停止正在运行中的容器： docker start $name 此处的 $name 就是在启动容器那一步定义的容器的识别符 删除容器docker rm -f container-id 删除指定容器 docker rm $(docker ps -a -q) 删除所有容器 查看容器日志docker logs $name 创建镜像略 参考资料 https://docs.docker.com/ http://www.docker.org.cn https://teddysun.com/536.html]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MikrotikRouterOS基本操作]]></title>
+    <url>%2F2018%2F08%2F15%2FMikrotikRouterOS%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[本文讲述 Mikrotik RouterOS V6.42.6 快速上手操作 （PS：食用方法）]]></content>
+      <categories>
+        <category>软路由</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>Mikrotik Router</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DN42-Decentralized Network]]></title>
     <url>%2F2018%2F08%2F06%2FDN42-Decentralized%20Network%2F</url>
     <content type="text"><![CDATA[关于 DN42 dn42是一个大型动态VPN ，它采用Internet技术（ BGP ，whois数据库， DNS等）。 由于边界网关协议， 参与者使用网络隧道（ GRE ， OpenVPN ， Tinc ， IPsec ）和交换路由相互连接。 网络地址在172.20.0.0/14范围内分配，并使用私有AS号以及ULA-Range（ fd00::/8 ）中的IPv6地址 。 dn42可用于学习网络和连接私人网络，如黑客空间或社区网络。 但最重要的是，在dn42中尝试路由很有趣！参与dn42主要用于学习BGP等路由技术，使用相当大的网络（~200 AS，~400前缀）。 dn42非常类似于互联网，因此它可以作为新想法的动手测试场，或者仅仅是为了学习你可能无法在互联网上做的真实网络内容（BGP多宿主，传输）。 与互联网相比最大的优势：如果你在网络中破坏某些东西，你就不会有任何大型网络运营商愤怒地对你大喊大叫。涨姿势！@ 前言相关的文献资料可能会比较少，需具备相应的网络知识和操作能力。相关的其他资料需要自行 Google 官方维基 https://wiki.dn42.us/Home 虽然同为去中心化网络，DN42并不是匿名的。如果你需要完全匿名化的网络，请使用Tor。 要求 你有至少一个24/7全天候运行的路由器。 任何Linux或BSD盒都可以变成路由器。 如果您的家庭路由器运行OpenWRT，您可以考虑将其用于dn42。 您的路由器能够通过Internet建立网络隧道（GRE，OpenVPN，IPSec，Tinc ……）。 请注意，您的网络运营商可能会过滤此类流量，例如在学校或大学中。 您通常了解网络和路由（即您已经听说过BGP，IGP，转发，并且您愿意配置BGP路由器，如Quagga或Bird） 加入 DN42 网络请参考官方的入门文档：https://dn42.net/howto/Getting-started 想法下一步编写中参考资料 DN42去中心化网络 DN42 DN42 入門指南]]></content>
@@ -28,7 +76,7 @@
   <entry>
     <title><![CDATA[2018上半年金融分析]]></title>
     <url>%2F2018%2F08%2F03%2F2018%E4%B8%8A%E5%8D%8A%E5%B9%B4%E9%87%91%E8%9E%8D%E5%88%86%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[记得大跌是从2015年5月28日这天，上午10点半过后，第一波下跌开始，创业板领跌，高价股下跌，到下午2点40分后，更是一波3%幅度130多点的下跌，使市场上众多股票由涨停到跌停。市场表现瞬间引爆。第二天 市场开盘不到10分钟即开始延续昨日凶悍的下跌，一笔近乎直线的下跌猛然间跌到了4%。后来的救市、熔断。离开了A股市场，直到今日笔者尚未回归。 2018年2月9日大跌 2018年6月19日大跌 2018年6月至7月P2P市场暴雷 2018年7月26日 拼多多PDD美国纳斯达克上市 #参考文章 80后首富们的富上加富，不小心泄露了中国最底层的贫瘠 重启改革]]></content>
+    <content type="text"><![CDATA[记得大跌是从2015年5月28日这天，上午10点半过后，第一波下跌开始，创业板领跌，高价股下跌，到下午2点40分后，更是一波3%幅度130多点的下跌，使市场上众多股票由涨停到跌停。市场表现瞬间引爆。第二天 市场开盘不到10分钟即开始延续昨日凶悍的下跌，一笔近乎直线的下跌猛然间跌到了4%。后来的救市、熔断。 2018年2月9日大跌 2018年6月19日大跌 2018年6月至7月P2P市场暴雷 2018年7月26日 拼多多PDD美国纳斯达克上市 参考文章 80后首富们的富上加富，不小心泄露了中国最底层的贫瘠 重启改革]]></content>
       <categories>
         <category>金融</category>
       </categories>
