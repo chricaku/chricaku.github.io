@@ -112,25 +112,27 @@
 
 
 
-  <meta name="description" content="本文讲述 Mikrotik RouterOS V6.42.6 快速上手操作 （PS：食用方法）">
-<meta name="keywords" content="ROS,Mikrotik Router">
+  <meta name="description" content="新项目与原项目使用环境不符，又要建立新的服务器，环境搭建繁琐，这时候Docker的优势就出来了。">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MikrotikRouterOS基本操作">
-<meta property="og:url" content="https://chrica.me/mikrotikrouteros-basic-operation.html">
+<meta property="og:title" content="Docker入门">
+<meta property="og:url" content="https://chrica.me/posts/getting-started-with-docker/index.html">
 <meta property="og:site_name" content="Chrica">
-<meta property="og:description" content="本文讲述 Mikrotik RouterOS V6.42.6 快速上手操作 （PS：食用方法）">
+<meta property="og:description" content="新项目与原项目使用环境不符，又要建立新的服务器，环境搭建繁琐，这时候Docker的优势就出来了。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-15T04:12:13.000Z">
+<meta property="og:image" content="https://chrica.me/posts/getting-started-with-docker/Docker_container_engine_logo.png">
+<meta property="og:updated_time" content="2018-08-16T00:42:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MikrotikRouterOS基本操作">
-<meta name="twitter:description" content="本文讲述 Mikrotik RouterOS V6.42.6 快速上手操作 （PS：食用方法）">
+<meta name="twitter:title" content="Docker入门">
+<meta name="twitter:description" content="新项目与原项目使用环境不符，又要建立新的服务器，环境搭建繁琐，这时候Docker的优势就出来了。">
+<meta name="twitter:image" content="https://chrica.me/posts/getting-started-with-docker/Docker_container_engine_logo.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chrica.me/mikrotikrouteros-basic-operation.html"/>
+  <link rel="canonical" href="https://chrica.me/posts/getting-started-with-docker/"/>
 
 
 
@@ -140,7 +142,7 @@
   };
 </script>
 
-  <title>MikrotikRouterOS基本操作 | Chrica</title>
+  <title>Docker入门 | Chrica</title>
   
 
 
@@ -344,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chrica.me/mikrotikrouteros-basic-operation.html">
+    <link itemprop="mainEntityOfPage" href="https://chrica.me/posts/getting-started-with-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chrica">
@@ -361,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MikrotikRouterOS基本操作
+          <h1 class="post-title" itemprop="name headline">Docker入门
               
             
           </h1>
@@ -386,7 +388,7 @@
                 
               
 
-              <time title="创建时间：2018-08-15 12:12:13" itemprop="dateCreated datePublished" datetime="2018-08-15T12:12:13+08:00">2018-08-15</time>
+              <time title="创建时间：2018-08-16 08:42:40" itemprop="dateCreated datePublished" datetime="2018-08-16T08:42:40+08:00">2018-08-16</time>
             
 
             
@@ -404,7 +406,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软路由/" itemprop="url" rel="index"><span itemprop="name">软路由</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
 
                 
                 
@@ -432,7 +434,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">50</span>
+                <span title="本文字数">3.4k</span>
               
 
               
@@ -446,7 +448,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -466,9 +468,194 @@
       
 
       
-        <blockquote>
-<p>本文讲述 Mikrotik RouterOS V6.42.6 快速上手操作 （PS：食用方法）<br><a id="more"></a></p>
+        <p> <img src="/posts/getting-started-with-docker/Docker_container_engine_logo.png" alt=""></p>
+<blockquote>
+<p>新项目与原项目使用环境不符，又要建立新的服务器，环境搭建繁琐，这时候Docker的优势就出来了。<br><a id="more"></a></p>
 </blockquote>
+<h1 id="官方描述"><a href="#官方描述" class="headerlink" title="官方描述"></a>官方描述</h1><p>Docker是一个开放源代码软件项目，让应用程序布署在软件容器下的工作可以自动化进行，借此在Linux操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。Docker利用Linux核心中的资源分脱机制，例如cgroups，以及Linux核心名字空间，来创建独立的软件容器。</p>
+<p>Docker通常用于如下场景：</p>
+<ul>
+<li>web应用的自动化打包和发布；</li>
+<li>自动化测试和持续集成、发布；</li>
+<li>在服务型环境中部署和调整数据库或其他的后台应用；</li>
+<li>从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。</li>
+</ul>
+<p><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">官方入门教程https://docs.docker.com/get-started/</a></p>
+<h1 id="支持平台"><a href="#支持平台" class="headerlink" title="支持平台"></a>支持平台</h1><h2 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h2><table>
+<thead>
+<tr>
+<th>Platform</th>
+<th style="text-align:center">x86_64          </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker for Mac (macOS)</td>
+<td style="text-align:center">yes  </td>
+</tr>
+<tr>
+<td>Docker for Windows (Microsoft Windows 10)</td>
+<td style="text-align:center">yes        </td>
+</tr>
+</tbody>
+</table>
+<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><table>
+<thead>
+<tr>
+<th>Platform</th>
+<th style="text-align:center">x86_64/amd64</th>
+<th style="text-align:right">ARM</th>
+<th style="text-align:right">ARM64 / AARCH64</th>
+<th style="text-align:right">IBM Power (ppc64le)</th>
+<th style="text-align:right">IBM Z (s390x)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CentOS</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">yes</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>Debian</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:right">yes</td>
+<td style="text-align:right">yes</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>Fedora</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>Ubuntu</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:right">yes</td>
+<td style="text-align:right">yes</td>
+<td style="text-align:right">yes</td>
+<td style="text-align:right">yes</td>
+</tr>
+</tbody>
+</table>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><blockquote>
+<p>本文以 Debian/Ubuntu 操作系统作为参考</p>
+</blockquote>
+<ul>
+<li>中国环境需要换源（不换源可能无法下载或下载极慢）<h2 id="安装docker-io包之前，需要先设置使用backports源"><a href="#安装docker-io包之前，需要先设置使用backports源" class="headerlink" title="安装docker.io包之前，需要先设置使用backports源"></a>安装docker.io包之前，需要先设置使用backports源</h2>编辑 /etc/apt/sources.list 文件，加入下面这一句：</li>
+</ul>
+<pre><code>deb http://http.debian.net/debian jessie-backports main 
+</code></pre><h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><ol>
+<li>docker.io包安装<br>确保已经按照第一步的操作步骤添加了backports源，然后执行下面的命令。</li>
+</ol>
+<pre><code>$ sudo apt-get update 
+$ sudo apt-get install docker.io
+</code></pre><p>确认docker运行是否正常。</p>
+<pre><code>$ sudo docker run --rm hello-world 
+</code></pre><p>查看docker版本</p>
+<pre><code>$ docker version
+</code></pre><ol start="2">
+<li>官方的安装脚本一键安装</li>
+</ol>
+<p>执行脚本方法如下：</p>
+<pre><code>wget -qO- get.docker.com | bash 
+</code></pre><p>安装完成后，运行下面的命令，验证是否安装成功。</p>
+<pre><code>docker version 
+</code></pre><p>启动 Docker</p>
+<pre><code>systemctl start docker 
+</code></pre><p>查看 Docker 启动状态</p>
+<pre><code>systemctl status docker
+</code></pre><p>允许 Docker 开机自启</p>
+<pre><code>systemctl enable docker 
+</code></pre><h2 id="Debian-如何删除docker"><a href="#Debian-如何删除docker" class="headerlink" title="Debian 如何删除docker?"></a>Debian 如何删除docker?</h2><blockquote>
+<p>Debian系统下面删除docker，要按照下面几个步骤来删除。</p>
+</blockquote>
+<ol>
+<li>使用purge命令清除docker-io包。</li>
+</ol>
+<pre><code>$ sudo apt-get purge docker-io
+</code></pre><p>或者用autoremove命令将不再使用的依赖的包删除掉。</p>
+<pre><code>$ sudo apt-get autoremove --purge docker-io 
+</code></pre><p> 需要注意的是上面的命令只是删除了docker.io包，并不会删除下载的镜像，产生的容器文件，卷，已经用户创建的配置文件。如果你觉得不爽，可以用下面的命令干掉它们：</p>
+<pre><code>$ rm -rf /var/lib/docker
+</code></pre><p> 然后手工删除创建的配置文件。</p>
+<blockquote>
+<p>备注：docker这个名字已经被占用了，所以debian下面的docker的包的名字是docker.io。</p>
+</blockquote>
+<ol start="2">
+<li><p>常规卸载/删除 docker</p>
+<p> apt-get list installed | grep docker 查看 安装的docker内容</p>
+<p> apt-get -y remove docker-* 删除安装的 docker 内容</p>
+</li>
+</ol>
+<h1 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h1><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><pre><code>docker pull     ## docker pull teddysun/shadowsocks-libev 
+</code></pre><h2 id="查询某个镜像"><a href="#查询某个镜像" class="headerlink" title="查询某个镜像"></a>查询某个镜像</h2><pre><code>docker search $name   ## docker search redis
+</code></pre><h2 id="检查运行中的镜像"><a href="#检查运行中的镜像" class="headerlink" title="检查运行中的镜像"></a>检查运行中的镜像</h2><ul>
+<li><p>使用docker ps命令可以查看所有正在运行中的容器列表，</p>
+<pre><code>docker ps
+</code></pre><p>或者</p>
+<pre><code>docker ps -l
+
+docker images 
+</code></pre></li>
+<li><p>使用docker inspect命令我们可以查看更详细的关于某一个容器的信息。</p>
+<pre><code>docker inspect     
+</code></pre></li>
+</ul>
+<p>Recap and cheat sheet</p>
+<pre><code>## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Execute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+</code></pre><h2 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h2><p>略</p>
+<h2 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h2><p>如范例中，定义的端口是 9000，那么在启动容器时就需要将 9000 端口映射到宿主机的对外端口上。<br>启动命令：</p>
+<pre><code>docker run -d -p 9000:9000 -p 9000:9000/udp --name ss-libev -v /etc/shadowsocks-libev:/etc/shadowsocks-libev teddysun/shadowsocks-libev 
+</code></pre><p>docker run：开始运行一个容器。</p>
+<p>-d 参数：容器以后台运行并输出容器 ID。</p>
+<p>-p 参数：容器的 9000 端口映射到本机的 9000 端口。默认是映射 TCP，当需要映射 UDP 时，那就再追加一次 UDP 的映射。冒号后面是容器端口，冒号前面是宿主机端口，可以写成一致，也可以不一致。</p>
+<p>–name 参数：给容器分配一个识别符，方便将来的启动，停止，删除等操作。</p>
+<p>-v 参数：挂载卷(volume)，冒号后面是容器的路径，冒号前面是宿主机的路径，可以写成一致，也可以不一致。</p>
+<p>teddysun/shadowsocks-libev：这是拉取回来的镜像路径。</p>
+<p>当然，这里也可以启动 Tag 为 alpine 的镜像命令：</p>
+<pre><code>docker run -d -p 9000:9000 -p 9000:9000/udp --name ss-libev -v /etc/shadowsocks-libev:/etc/shadowsocks-libev teddysun/shadowsocks-libev:alpine 
+</code></pre><p>注意：此处仅作为演示，不能同时执行上面的这两个启动命令，因为端口都是 9000，产生冲突了。</p>
+<h2 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h2><p>利用如下命令可以停止正在运行中的容器：</p>
+<pre><code>docker stop $name
+</code></pre><p>此处的 $name 就是在启动容器那一步定义的容器的识别符</p>
+<h2 id="启动容器-1"><a href="#启动容器-1" class="headerlink" title="启动容器"></a>启动容器</h2><p>利用如下命令可以停止正在运行中的容器：</p>
+<pre><code>docker start $name
+</code></pre><p>此处的 $name 就是在启动容器那一步定义的容器的识别符</p>
+<h2 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h2><pre><code>docker rm -f container-id 删除指定容器
+docker rm $(docker ps -a -q) 删除所有容器
+</code></pre><h2 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h2><pre><code>docker logs $name
+</code></pre><h1 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h1><p>略</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a href="https://docs.docker.com/" target="_blank" rel="noopener">https://docs.docker.com/</a></li>
+<li><a href="http://www.docker.org.cn" target="_blank" rel="noopener">http://www.docker.org.cn</a></li>
+<li><a href="https://teddysun.com/536.html" target="_blank" rel="noopener">https://teddysun.com/536.html</a></li>
+</ol>
 
       
     </div>
@@ -490,7 +677,7 @@
     <strong>本文作者： </strong>Chrica</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://chrica.me/mikrotikrouteros-basic-operation.html" title="MikrotikRouterOS基本操作">https://chrica.me/mikrotikrouteros-basic-operation.html</a>
+    <a href="https://chrica.me/posts/getting-started-with-docker/" title="Docker入门">https://chrica.me/posts/getting-started-with-docker/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -503,9 +690,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ROS/" rel="tag"><i class="fa fa-tag"></i> ROS</a>
-          
-            <a href="/tags/Mikrotik-Router/" rel="tag"><i class="fa fa-tag"></i> Mikrotik Router</a>
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
           
         </div>
       
@@ -518,8 +703,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/dn42decentralized-network.html" rel="next" title="DN42-Decentralized Network">
-                <i class="fa fa-chevron-left"></i> DN42-Decentralized Network
+              <a href="/posts/mikrotik-routeros-basic-operation/" rel="next" title="MikrotikRouterOS基本操作">
+                <i class="fa fa-chevron-left"></i> MikrotikRouterOS基本操作
               </a>
             
           </div>
@@ -528,8 +713,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/getting-started-with-docker.html" rel="prev" title="Docker入门">
-                Docker入门 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/openconnect-ocserv/" rel="prev" title="OpenConnect-ocserv">
+                OpenConnect-ocserv <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -584,8 +769,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -718,6 +912,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#官方描述"><span class="nav-number">1.</span> <span class="nav-text">官方描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#支持平台"><span class="nav-number">2.</span> <span class="nav-text">支持平台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#桌面"><span class="nav-number">2.1.</span> <span class="nav-text">桌面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器"><span class="nav-number">2.2.</span> <span class="nav-text">服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">3.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装docker-io包之前，需要先设置使用backports源"><span class="nav-number">3.1.</span> <span class="nav-text">安装docker.io包之前，需要先设置使用backports源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装docker"><span class="nav-number">3.2.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debian-如何删除docker"><span class="nav-number">3.3.</span> <span class="nav-text">Debian 如何删除docker?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署服务"><span class="nav-number">4.</span> <span class="nav-text">部署服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拉取镜像"><span class="nav-number">4.1.</span> <span class="nav-text">拉取镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询某个镜像"><span class="nav-number">4.2.</span> <span class="nav-text">查询某个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查运行中的镜像"><span class="nav-number">4.3.</span> <span class="nav-text">检查运行中的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建配置文件"><span class="nav-number">4.4.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动容器"><span class="nav-number">4.5.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#停止容器"><span class="nav-number">4.6.</span> <span class="nav-text">停止容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动容器-1"><span class="nav-number">4.7.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除容器"><span class="nav-number">4.8.</span> <span class="nav-text">删除容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看容器日志"><span class="nav-number">4.9.</span> <span class="nav-text">查看容器日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建镜像"><span class="nav-number">5.</span> <span class="nav-text">创建镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
