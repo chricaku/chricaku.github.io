@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[wordpress修改数据表前缀]]></title>
+    <url>%2Fposts%2Fwordpress-modify-data-table-prefix%2F</url>
+    <content type="text"><![CDATA[一个数据库里可能有多个数据表，为了更美观、更好直观的区分和统计数据，同时一定程度上避免数据的混淆，修改部分数据表的前缀 使用phpMyAdmin批量修改Mysql数据表前缀的方法 此例中假定修改数据库中 cusle 数据库 前缀为“wpcusle_”，并将所有符合条件表的前缀修改为“wp_”。 用phpMyAdmin打开要修改前缀的数据库cusle，执行以下SQL语句（其中加粗斜体字是需要根据实际需求替换的）： 123456Select CONCAT( 'ALTER TABLE ', table_name, ' RENAME TO ', replace(table_name,'wpcusle_','wp_'),';')from information_schema.tableswhere TABLE_SCHEMA = 'cusle' and table_name LIKE 'wpcusle_%'; 在执行SQL语句生成的页面上点击“导出”，选择“自定义”-&gt;“直接显示为文本”，CSV格式，清空“内容分隔符”为空 执行导出功能后，到达结果窗口如下，复制文本框中的内容 进入数据库“cusle”的SQL执行窗口，将代码粘贴到SQL文本框中，执行。刷新数据库后我们就能发现该数据库的表前缀均已变成 wp_。 继续点击『SQL』按钮，运行以下 SQL 语句，修改 options 和 usermeta 表中的数据： 12update boke_options set option_name = replace(option_name,'wpcusle_','wp_');update boke_usermeta set meta_key = replace(meta_key,'wpcusle_','wp_'); 注意事项数据操作有风险，请在操作前备份数据。由于软件版本等原因，操作仅供参考，因本文修改数据库导致丢失或出错的，本文作者不承担责任。]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>wordpress</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[wordpress搬家换域名]]></title>
+    <url>%2Fposts%2Fwordpress-move-and-change-domain-name%2F</url>
+    <content type="text"><![CDATA[Σ(っ °Д °;)っ瞎折腾 wordpress搬家 将备份好的数据放到网站根目录 新建数据表导入数据 修改根目录下wp-config.php 123456/** WordPress数据库的名称 */define('DB_NAME', '填写你的数据库名称');/** MySQL数据库用户名 */define('DB_USER', '填写你的数据库账号');/** MySQL数据库密码 */define('DB_PASSWORD', '填写你的数据库密码'); wordpress换域名登陆phpMyAdmin后台，点sql把下面的代码复制进去，把旧域名改成你本地的域名，新域名改成你正式的域名，然后执行即可 1234UPDATE wp_posts SET post_content = replace( post_content, '旧域名','新域名') ;UPDATE wp_comments SET comment_content = replace(comment_content, '旧域名', '新域名') ;UPDATE wp_comments SET comment_author_url = replace(comment_author_url, '旧域名', '新域名') ;UPDATE wp_options SET option_value = replace( option_value , '旧域名','新域名') ; 一般到这里就结束了，出现的问题根据提示解决 打开网站可能会出现几行乱码，不用担心登陆一下后台更新一下wordpress，或者插件既可以解决]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[AppStore_iTunes_旧版App抓包]]></title>
     <url>%2Fposts%2Fappstoreitunes-legacy-app-capture%2F</url>
     <content type="text"><![CDATA[我们不得不说有些软件应用的版本越新，使用感越差！ 前言 从 iTunes 12.7 开始，Apple 去掉了 App Store 功能，也就无法在电脑上下载和管理 App 安装包，非常不方便。 之后 Apple 又出了 iTunes 12.6.3 特殊版本，重新加入了从 App Store 功能，可以下载和管理各个App的 ipa 安装包。 目前 iTunes 12.6.3 又更新至 iTunes 12.6.5 版本，也有App Store 功能。 查询APP版本号和ID: https://tools.lancely.tech/apple/app-historyiTunes iTunes 12.6.5 macOS：官网地址,点击下载 Windows 64 bit：官网地址,点击下载 Windows 32 bit：官网地址,点击下载iTunes 12.6.4 macOS：官网地址,点击下载 Windows 64 bit：官网地址,点击下载 Windows 32 bit：官网地址,点击下载iTunes 12.6.3 macOS：官网地址,点击下载 Windows 64 bit：官网地址,点击下载 Windows 32 bit：官网地址,点击下载 Fiddler 官网下载 https://www.telerik.com/fiddler 简单的步骤: Fidder 开启 HTTPS 抓包功能. 设置拦截关键字: [ bpu MZBuy.woa/wa/bayProduct ]. 在iTunes中登陆你的Apple ID并搜索想要下载的APP. 在iTunes中点击 获取 . 在Fidder中看到有个被拦截的请求,定位到STRING字段,修改成想要- 的版本的ID号并放行. 待下载完,从iTunes安装至手机即可. 备注 如何去除旧版本app store更新提醒 修改电脑上ipa后缀名为zip，打开删除里面的“iTunesMetadata.plist”文件； 后缀改回.ipa，使用助手安装。 存到云盘使用 捷径Shortcut安装（原Workflow） IOS常用旧版软件ID整理分享 详情见：https://www.jianshu.com/p/5a28dacba975]]></content>
@@ -69,7 +89,7 @@
       </categories>
       <tags>
         <tag>Social</tag>
-        <tag>改革</tag>
+        <tag>Reform</tag>
         <tag>GDP</tag>
       </tags>
   </entry>
@@ -81,7 +101,7 @@
         <category>金融</category>
       </categories>
       <tags>
-        <tag>A股</tag>
+        <tag>Stock</tag>
         <tag>P2P</tag>
         <tag>Social</tag>
       </tags>
