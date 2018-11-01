@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[VSCode设置中文显示]]></title>
+    <url>%2Fposts%2FVSCode%20setting%20Chinese%20display%2F</url>
+    <content type="text"><![CDATA[Vscode是一款开源的跨平台编辑器。默认情况下，vscode使用的语言为英文(us)，如何将其显示语言修改成中文了？ 打开vscode工具； 使用快捷键组合【Ctrl+Shift+p】，在搜索框中输入configure display language，点击确定后； 修改locale.json文件下的属性“locale”为zh-CN; 重启vscode工具； 如果重启后vscode菜单等仍然是英文显示，在商店查看已安装的插件，把中文插件重新安装一遍（如下图），然后在重启工具。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>VSCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[wordpress修改数据表前缀]]></title>
     <url>%2Fposts%2Fwordpress-modify-data-table-prefix%2F</url>
     <content type="text"><![CDATA[一个数据库里可能有多个数据表，为了更美观、更好直观的区分和统计数据，同时一定程度上避免数据的混淆，修改部分数据表的前缀 使用phpMyAdmin批量修改Mysql数据表前缀的方法 此例中假定修改数据库中 cusle 数据库 前缀为“wpcusle_”，并将所有符合条件表的前缀修改为“wp_”。 用phpMyAdmin打开要修改前缀的数据库cusle，执行以下SQL语句（其中加粗斜体字是需要根据实际需求替换的）： 123456Select CONCAT( 'ALTER TABLE ', table_name, ' RENAME TO ', replace(table_name,'wpcusle_','wp_'),';')from information_schema.tableswhere TABLE_SCHEMA = 'cusle' and table_name LIKE 'wpcusle_%'; 在执行SQL语句生成的页面上点击“导出”，选择“自定义”-&gt;“直接显示为文本”，CSV格式，清空“内容分隔符”为空 执行导出功能后，到达结果窗口如下，复制文本框中的内容 进入数据库“cusle”的SQL执行窗口，将代码粘贴到SQL文本框中，执行。刷新数据库后我们就能发现该数据库的表前缀均已变成 wp_。 继续点击『SQL』按钮，运行以下 SQL 语句，修改 options 和 usermeta 表中的数据： 12update boke_options set option_name = replace(option_name,'wpcusle_','wp_');update boke_usermeta set meta_key = replace(meta_key,'wpcusle_','wp_'); 注意事项数据操作有风险，请在操作前备份数据。由于软件版本等原因，操作仅供参考，因本文修改数据库导致丢失或出错的，本文作者不承担责任。]]></content>
@@ -88,9 +99,9 @@
         <category>书籍</category>
       </categories>
       <tags>
-        <tag>Social</tag>
         <tag>Reform</tag>
         <tag>GDP</tag>
+        <tag>Social</tag>
       </tags>
   </entry>
   <entry>
@@ -101,9 +112,9 @@
         <category>金融</category>
       </categories>
       <tags>
+        <tag>Social</tag>
         <tag>Stock</tag>
         <tag>P2P</tag>
-        <tag>Social</tag>
       </tags>
   </entry>
   <entry>
