@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[内网穿透]]></title>
+    <url>%2Fposts%2FInternal%20network%20penetration%2F</url>
+    <content type="text"><![CDATA[内网穿透即NAT穿透， 本文介绍常规的内网穿透，官网打不开一般被墙（爬墙即可），什么爬墙？？？懂的人自然懂。重要的是——-适合做自己的才是最好的，仁者见仁智者见智。 ngrok官网：secure introspectable tunnels to localhost 描述：主要用途是给网站或者安装开发提供部署环境，但是也同样可以用来进行端口转发。除了官方提供的服务之外，作者也放出了源代码，国内有好心的小伙伴也有自行搭建服务端供大家使用的。建议可以找服务器是在自己地区附近的，响应速度会相对快很多。 frp❤❤官网：A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet. 描述：原理与ngrok是相同的，但服务端需要自己搭建，由于该项目是完全开源的，所以代码安全性较高，目前自用感觉不错，前提是服务端速度足够。 n2n❤❤官网：Peer-to-peer VPN 描述：虚拟局域网，n2n的中央节点服务端是需要自己搭建的。如果中央节点的服务端速度足够，那么速度相当快！ zerotier❤❤❤官网：ZeroTier | Home 描述：虚拟局域网。通过一个公共的服务器，建立一个虚拟局域网，让家里电脑和公司电脑同处于一个虚拟局域网，然后通过分配到的虚拟局域网ip进行连接。两端都需要安装客户端。服务端不开源（ZeroTier官方提供），客户端开源。基本可以跑满宽带。 Softether❤官网：SoftEther VPN Project 描述：SoftEther VPN项目的开发和销售SoftEther VPN，一个开源的免费​跨平台多协议的VPN方案，作为筑波大学的一个学术项目筑波大学。 DDNS 前提是有公网IP(一般都是动态IP) 对比ngrok,n2n,frp 都研究过也基本用过, n2n 使用相对较久。 n2n是 p2p,打洞,但速率根据实际网络环境而决定。 最终,发现了 zerotier,呵呵,这特么才是 p2p,速度直接跑满宽带.虽然刚连接上还是需要找中心服务器握手,但是后期确实可以建立直联跑满带宽.其次,zerotier 可以自己搭建国内私有握手服务器(moon),握手速度超快,真心爽爆了 n2n 只要知道域和密码就能连接进来,有时候还是不太放心的,而 zerotier 是有管理界面的,虽说也是托管在官方,但是相对来说,还是安心不少的 ngrok/frp 两者相似但 frp 功能较为丰富 开源 ngrok 和 frp 严重依赖于公网固定 IP 的 VPS，是一个中性化的内网穿透工具，一旦中心挂掉，那么所有的节点都无法工作 n2n 开源 SuperNode EdgeNode zerotier 操作快捷方便 中转服务器 moon（加速器，非必需） 操作参考链接Appin softether 开源 最显著的优势是完全可以自建，通过带公网 ip 服务器反向连接，方便的 gui 管理界面，nb 的二层级联，3 层路由，32 线程 https 连接，可以将多台服务器连接在一起通过 iproute2 组网多出口，支持 n 多常用客户端 l2tp openvpn sstp 优点：Softether 穿透后，你电脑拿到的 IP 就是家里路由的内网 IP，所以局域网唤醒这种小事是肯定支持的，因为人家是 L2TP 二层穿透，这包含了 VLAN 和 DHCP，和你实际在家一模一样 缺点：目前比下来相对 tinc 就少了个去中心化的 mesh vpn。虽然作者说是支持 mesh 形式，但不知道如何配置。在 mtk7620 这种路由也有 4MB/s 的速度，非常不错。 任意 vps 和你内网的电脑上都装上 Softether，使用 l2tp 互联后，你不光可以穿透，你还可以像我一样，人在广州，但是可以连回上海的家里，使用路由器分配的上海 IP。。。。这个简直是神器。虽然 l2tp 也不神秘，可是这货是 GUI 配置。 DDNS 动态公网IP 以上经验之谈]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>VPN</tag>
+        <tag>Frp</tag>
+        <tag>N2n</tag>
+        <tag>Ngrok</tag>
+        <tag>Zerotier</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[VSCode设置中文显示]]></title>
     <url>%2Fposts%2FVSCode%20setting%20Chinese%20display%2F</url>
     <content type="text"><![CDATA[Vscode是一款开源的跨平台编辑器。默认情况下，vscode使用的语言为英文(us)，如何将其显示语言修改成中文了？ 打开vscode工具； 使用快捷键组合【Ctrl+Shift+p】，在搜索框中输入configure display language，点击确定后； 修改locale.json文件下的属性“locale”为zh-CN; 重启vscode工具； 如果重启后vscode菜单等仍然是英文显示，在商店查看已安装的插件，把中文插件重新安装一遍（如下图），然后在重启工具。]]></content>
@@ -99,9 +114,9 @@
         <category>书籍</category>
       </categories>
       <tags>
+        <tag>Social</tag>
         <tag>Reform</tag>
         <tag>GDP</tag>
-        <tag>Social</tag>
       </tags>
   </entry>
   <entry>
@@ -112,9 +127,9 @@
         <category>金融</category>
       </categories>
       <tags>
-        <tag>Social</tag>
         <tag>Stock</tag>
         <tag>P2P</tag>
+        <tag>Social</tag>
       </tags>
   </entry>
   <entry>
