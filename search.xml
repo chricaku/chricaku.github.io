@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AEDE算法加密-libsodium]]></title>
+    <url>%2Fposts%2FAEDE%20algorithm%20encryption%2F</url>
+    <content type="text"><![CDATA[互联网信息流太多，安全隐私性也来越重要。 AEDE 算法 AES-256-GCM ChaCha20-Poly1305 ChaCha20-IETF-Poly1305 XChaCha20-IETF-Poly1305 加密信息对比 加密方式 Key 大小 Nonce大小 Block大小 MAC 大小 libsodium版本 AES-256-GCM 256 bits 96 bits 128 bits 128 bits libsodium &gt;= 1.0.4 but requires hardware support. IETF standard; also implemented in many other libraries. ChaCha20-Poly1305 256 bits 64 bits 512 bits 128 bits libsodium &gt;= 0.6.0. Also implemented in {Libre,Open,Boring}SSL. ChaCha20-IETF-Poly1305 256 bits 96 bits 512 bits 128 bits libsodium &gt;= 1.0.4. IETF standard; also implemented in Ring, {Libre,Open,Boring}SSL and other libraries. XChaCha20-IETF-Poly1305 256 bits 192 bits 512 bits 128 bits libsodium &gt;= 1.0.12. 加密方式选择 AES-256-GCM 目前这种结构支持硬件加速，需要Intel SSSE3扩展，以及 aesni 和 pclmul。官方暂无计划将AES-256-GCM通过非硬件技术(即软件层)来实现。 英特尔Westmere处理器（2010年推出）和更新版符合要求，没有计划支持AES-GCM的非硬件加速实现，因为在软件实现中正确减少侧通道伴随着主要的速度权衡，这使得AES-GCM的整个点超过了ChaCha20-Poly1305。 XChaCha20-IETF-Poly1305 Xchacha20-poly1305-ietf 兼容安全与速度，在没有AES指令集的设备上表现良好。 XChaCha20-Poly1305继承了ChaCha20-Poly1305所有优势并将随机文件nonce大小扩展到192位。这种扩展的随机数大小允许安全使用随机数。libsodium中的XChaCha20-Poly1305实现可在所有支持的体系结构中移植。 TipsChaCha20-Poly1305虽然AES-256-GCM在专用硬件上速度非常快，但在非专用硬件上性能要低得多。并且, AES容易受到缓存冲突时间的攻击。 ChaCha20在纯软件方面加密就比AES快得多，在缺乏专用AES硬件的平台上速度比其快三倍。 并且, ChaCha20对定时攻击也不敏感。 Poly1305是一种高速信息验证码。ChaCha20流密码+Poly1305认证的组合的使得其成为了Salsa20-Poly1305加密方式的替代品。其于2015年5月成为IETF官方标准，所以目前很多主流操作系统均以支持ChaCha20-Poly1305。 参考链接https://download.libsodium.org/doc/]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>AEDE</tag>
+        <tag>Libsodium</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Danteded Socks5 一键安装脚本]]></title>
     <url>%2Fposts%2FDanteded%20Socks5%20one-click%20installation%20script%2F</url>
     <content type="text"><![CDATA[编译还是太麻烦了点，为了方便 telegram 看老司机们开车，就去 github 找了个一键脚本，telegram 的车再也不会错过了。 原地址 中文https://github.com/Lozy/danted/blob/master/README_CN.md 英文https://github.com/Lozy/danted/blob/master/README.md 一键脚本安装 下载 wget --no-check-certificate https://raw.github.com/Lozy/danted/master/install.sh -O install.sh 安装 bash install.sh --port=端口 --user=自己设置用户名 --passwd=设置密码 成功 Dante Server Install Successfuly! 使用说明 命令参数 /etc/init.d/danted {start|stop|restart|status|add|del} 重启sock5 /etc/init.d/danted restart 或者 service danted restart 关闭sock5 /etc/init.d/danted stop 或者 service danted stop 开启sock5 /etc/init.d/danted start 或者 service danted start 查看sock5状态 /etc/init.d/danted status 或者 service danted status 添加SOCK5 PAM用户/修改密码 /etc/init.d/danted add 用户名 密码 删除SOCK5 PAM用户 /etc/init.d/danted del 用户名 配置文件路径/etc/danted/conf/ 日志记录路径 /var/log/danted.*.log danted 帮助命令 danted –help 根据上述产生的 socks5 代理地址如果你在 Telegram 使用的话，直接产生下面的链接就行了 https://t.me/socks?server=你的VPS IP地址&amp;port=端口&amp;user=用户名&amp;pass=密码 删除Dantedservice danted stop rm -rf /etc/danted/ rm -f /etc/init.d/danted]]></content>
