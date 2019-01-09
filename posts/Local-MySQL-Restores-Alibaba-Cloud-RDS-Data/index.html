@@ -112,20 +112,30 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Chrica">
-<meta property="og:url" content="https://chrica.me/archives/2018/08/index.html">
+  <meta name="description" content="本地恢复RDS数据，查阅官方和网民的相关博客走了挺多的坑，完整恢复如下   在查询和统计导出过程中window电脑会爆内存，导出数据不完整。MAC电脑没有问题。">
+<meta name="keywords" content="MySQL,RDS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地MySQL恢复阿里云RDS数据">
+<meta property="og:url" content="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/index.html">
 <meta property="og:site_name" content="Chrica">
+<meta property="og:description" content="本地恢复RDS数据，查阅官方和网民的相关博客走了挺多的坑，完整恢复如下   在查询和统计导出过程中window电脑会爆内存，导出数据不完整。MAC电脑没有问题。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/aliyunDB-768x472.jpg">
+<meta property="og:image" content="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/20190109Percona%20XtraBackup.png">
+<meta property="og:image" content="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/20190109XtraBackup.png">
+<meta property="og:image" content="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/20190109XtraBackup.png">
+<meta property="og:updated_time" content="2019-01-09T04:45:27.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chrica">
+<meta name="twitter:title" content="本地MySQL恢复阿里云RDS数据">
+<meta name="twitter:description" content="本地恢复RDS数据，查阅官方和网民的相关博客走了挺多的坑，完整恢复如下   在查询和统计导出过程中window电脑会爆内存，导出数据不完整。MAC电脑没有问题。">
+<meta name="twitter:image" content="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/aliyunDB-768x472.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chrica.me/archives/2018/08/"/>
+  <link rel="canonical" href="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/"/>
 
 
 
@@ -135,7 +145,7 @@
   };
 </script>
 
-  <title>归档 | Chrica</title>
+  <title>本地MySQL恢复阿里云RDS数据 | Chrica</title>
   
 
 
@@ -182,7 +192,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -255,7 +265,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
@@ -319,254 +329,332 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chrica">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chrica">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">本地MySQL恢复阿里云RDS数据
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-09 10:52:18 / 修改时间：12:45:27" itemprop="dateCreated datePublished" datetime="2019-01-09T10:52:18+08:00">2019-01-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 18 篇日志。 继续努力。
-      </span>
-      
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/getting-started-with-docker/" itemprop="url">
+          
+
+          
+            <div class="post-symbolscount">
               
-                <span itemprop="name">Docker入门</span>
+
               
-            </a>
-        
-      </h2>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.9k</span>
+              
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-16T08:42:40+08:00"
-              content="2018-08-16" >
-          08-16
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/mikrotik-routeros-basic-operation/" itemprop="url">
-              
-                <span itemprop="name">MikrotikRouterOS基本操作</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-15T12:12:13+08:00"
-              content="2018-08-15" >
-          08-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/dn42-decentralized-network/" itemprop="url">
-              
-                <span itemprop="name">DN42-Decentralized Network</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-06T15:31:10+08:00"
-              content="2018-08-06" >
-          08-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p><img src="/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/aliyunDB-768x472.jpg" alt=""><br>本地恢复RDS数据，查阅官方和网民的相关博客走了挺多的坑，完整恢复如下</p>
+<blockquote>
+</blockquote>
+<p>在查询和统计导出过程中window电脑会爆内存，导出数据不完整。MAC电脑没有问题。</p>
+<a id="more"></a>
+<h1 id="计算机配置"><a href="#计算机配置" class="headerlink" title="计算机配置"></a>计算机配置</h1><ul>
+<li>CPU: I5-6500 </li>
+<li>内存：16GB DDR4</li>
+<li>硬盘：1T</li>
+<li>数据量：300GB</li>
+</ul>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><blockquote>
+<p>下载相应的数据库版本</p>
+</blockquote>
+<ul>
+<li><p>RDS MySQL 使用开源软件 <a href="https://www.percona.com/" target="_blank" rel="noopener">percona-Xtrabackup</a> 对MySQL 数据库进行备份。需要下载该软件，然后使用该软件进行恢复。<br><img src="/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/20190109Percona XtraBackup.png" alt=""><br><img src="/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/20190109XtraBackup.png" alt=""></p>
+</li>
+<li><p>下载<a href="https://www.percona.com/downloads/percona-toolkit/LATEST/" target="_blank" rel="noopener">percona-toolkit</a><br><img src="/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/20190109XtraBackup.png" alt=""></p>
+</li>
+<li><p>下载解压工具 <a href="http://oss.aliyuncs.com/aliyunecs/rds_backup_extract.sh?spm=5176.7741817.2.12.qMkd9L&amp;file=rds_backup_extract.sh" target="_blank" rel="noopener">rds_backup_extract</a> (sh 文件)，目前只支持 64 位 Linux 系统。</p>
+</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li><p>创建data目录</p>
+<pre><code>mkdir -p /home/mysql/data
+</code></pre></li>
+<li><p>解压RDS备份文件</p>
+<pre><code>bash rds_backup_extract.sh -f &lt;数据备份文件名&gt;.tar.gz -C /home/mysql/data
+</code></pre><p> f 指定要解压的备份集文件# -C 指定解压到的目录；-C 参数是可选的，如果不指定就解压到当前目录，如 bash rds_backup_extract -f backup.tar.gz</p>
+</li>
+<li><p>安装Percona XtraBackup插件</p>
+<pre><code>yum install perl-DBI -y
+yum install perl-DBD-MySQL -y
+yum install perl-Time-HiRes -y
+yum install perl-IO-Socket-SSL –y
+yum install perl-TermReadKey.x86_64 -y
+yum install perl-Digest-MD5 -y
+</code></pre></li>
+<li><p>安装Percona XtraBackup</p>
+<pre><code>tar xvf Percona-XtraBackup-8.0.4-rc2c0777-el7-x86_64-bundle.tar
+cd Percona-XtraBackup-8.0.4-rc2c0777-el7-x86_64-bundle
+cp bin/innobackupex /usr/bin
+cp bin/xtrabackup* /usr/bin
+</code></pre></li>
+<li><p>安装percona-toolkit</p>
+<pre><code>rpm -ivh percona-toolkit-3.0.12-1.el7.x86_64.rpm
+</code></pre></li>
+<li><p>安装mysql<br>因为RDS是5.6版本，所以本地的mysql数据库要与RDS版本对应。</p>
+<pre><code>rpm -ivh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm &amp;&amp; yum -y install mysql-server mysql
+</code></pre></li>
+</ul>
+<h1 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h1><ul>
+<li><p>恢复解压好的备份文件</p>
+<pre><code>innobackupex --defaults-file=/home/mysql/data/backup-my.cnf --user=root --apply-log /home/mysql/data
+</code></pre><p>显示 completed OK，即执行成功</p>
+</li>
+<li><p>打开/home/mysql/data/backup-my.cnf</p>
+<pre><code>vi /home/mysql/data/backup-my.cnf
+</code></pre></li>
+<li><p>注释掉如下参数（阿里帮助文档只说注释掉三行，启动会失败。坑）</p>
+<pre><code>#innodb_fast_checksum
+#innodb_page_size
+#innodb_log_block_size
+#innodb_log_checksum_algorithm=innodb
+#rds_encrypt_data=false
+#innodb_encrypt_algorithm=aes_128_ecb
+</code></pre></li>
+<li><p>修改文件夹所属用户为mysql</p>
+<pre><code>chown -R mysql:mysql /home/mysql/data
+</code></pre></li>
+<li><p>启动mysql进程</p>
+<pre><code>mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data &amp;
+</code></pre></li>
+<li><p>查看进程</p>
+<pre><code>ps aux|grep mysqld
+</code></pre></li>
+</ul>
+<h1 id="登录数据库"><a href="#登录数据库" class="headerlink" title="登录数据库"></a>登录数据库</h1><ul>
+<li><p>登录mysql查看数据，默认密码为空</p>
+<pre><code>myslq -uroot
+</code></pre></li>
+<li><p>使用-A参数，取消预读库中表信息了，提高连接库的速度.</p>
+<pre><code>mysql -uroot -A
+</code></pre></li>
+</ul>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://help.aliyun.com/knowledge_detail/41817.html" target="_blank" rel="noopener">RDS for MySQL 物理备份文件恢复到自建数据库</a></li>
+<li><a href="https://blog.csdn.net/liudihedy/article/details/73222001" target="_blank" rel="noopener">阿里云RDS数据恢复到本地MySQL数据库</a></li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/the-book-underable-society/" itemprop="url">
-              
-                <span itemprop="name">《下流社会》一书</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-03T11:09:20+08:00"
-              content="2018-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/financial-analysis-in-the-first-half-of-2018/" itemprop="url">
-              
-                <span itemprop="name">2018上半年金融分析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-03T10:08:10+08:00"
-              content="2018-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Chrica</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/" title="本地MySQL恢复阿里云RDS数据">https://chrica.me/posts/Local-MySQL-Restores-Alibaba-Cloud-RDS-Data/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          
+            <a href="/tags/RDS/" rel="tag"><i class="fa fa-tag"></i> RDS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/AEDE-algorithm-encryption/" rel="next" title="AEDE算法加密-libsodium">
+                <i class="fa fa-chevron-left"></i> AEDE算法加密-libsodium
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODEyNi8xNDY1Ng"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -587,8 +675,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -752,6 +849,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机配置"><span class="nav-number">1.</span> <span class="nav-text">计算机配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number">2.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据恢复"><span class="nav-number">4.</span> <span class="nav-text">数据恢复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录数据库"><span class="nav-number">5.</span> <span class="nav-text">登录数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 <br>		
@@ -902,6 +1015,10 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
@@ -926,6 +1043,17 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1275,6 +1403,30 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

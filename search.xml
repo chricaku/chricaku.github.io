@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[本地MySQL恢复阿里云RDS数据]]></title>
+    <url>%2Fposts%2FLocal-MySQL-Restores-Alibaba-Cloud-RDS-Data%2F</url>
+    <content type="text"><![CDATA[本地恢复RDS数据，查阅官方和网民的相关博客走了挺多的坑，完整恢复如下 在查询和统计导出过程中window电脑会爆内存，导出数据不完整。MAC电脑没有问题。 计算机配置 CPU: I5-6500 内存：16GB DDR4 硬盘：1T 数据量：300GB 工具 下载相应的数据库版本 RDS MySQL 使用开源软件 percona-Xtrabackup 对MySQL 数据库进行备份。需要下载该软件，然后使用该软件进行恢复。 下载percona-toolkit 下载解压工具 rds_backup_extract (sh 文件)，目前只支持 64 位 Linux 系统。 安装 创建data目录 mkdir -p /home/mysql/data 解压RDS备份文件 bash rds_backup_extract.sh -f &lt;数据备份文件名&gt;.tar.gz -C /home/mysql/data f 指定要解压的备份集文件# -C 指定解压到的目录；-C 参数是可选的，如果不指定就解压到当前目录，如 bash rds_backup_extract -f backup.tar.gz 安装Percona XtraBackup插件 yum install perl-DBI -y yum install perl-DBD-MySQL -y yum install perl-Time-HiRes -y yum install perl-IO-Socket-SSL –y yum install perl-TermReadKey.x86_64 -y yum install perl-Digest-MD5 -y 安装Percona XtraBackup tar xvf Percona-XtraBackup-8.0.4-rc2c0777-el7-x86_64-bundle.tar cd Percona-XtraBackup-8.0.4-rc2c0777-el7-x86_64-bundle cp bin/innobackupex /usr/bin cp bin/xtrabackup* /usr/bin 安装percona-toolkit rpm -ivh percona-toolkit-3.0.12-1.el7.x86_64.rpm 安装mysql因为RDS是5.6版本，所以本地的mysql数据库要与RDS版本对应。 rpm -ivh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm &amp;&amp; yum -y install mysql-server mysql 数据恢复 恢复解压好的备份文件 innobackupex --defaults-file=/home/mysql/data/backup-my.cnf --user=root --apply-log /home/mysql/data 显示 completed OK，即执行成功 打开/home/mysql/data/backup-my.cnf vi /home/mysql/data/backup-my.cnf 注释掉如下参数（阿里帮助文档只说注释掉三行，启动会失败。坑） #innodb_fast_checksum #innodb_page_size #innodb_log_block_size #innodb_log_checksum_algorithm=innodb #rds_encrypt_data=false #innodb_encrypt_algorithm=aes_128_ecb 修改文件夹所属用户为mysql chown -R mysql:mysql /home/mysql/data 启动mysql进程 mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data &amp; 查看进程 ps aux|grep mysqld 登录数据库 登录mysql查看数据，默认密码为空 myslq -uroot 使用-A参数，取消预读库中表信息了，提高连接库的速度. mysql -uroot -A 参考链接 RDS for MySQL 物理备份文件恢复到自建数据库 阿里云RDS数据恢复到本地MySQL数据库]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>RDS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[AEDE算法加密-libsodium]]></title>
-    <url>%2Fposts%2FAEDE%20algorithm%20encryption%2F</url>
+    <url>%2Fposts%2FAEDE-algorithm-encryption%2F</url>
     <content type="text"><![CDATA[互联网信息流太多，安全隐私性也来越重要。 AEDE 算法 AES-256-GCM ChaCha20-Poly1305 ChaCha20-IETF-Poly1305 XChaCha20-IETF-Poly1305 加密信息对比 加密方式 Key 大小 Nonce大小 Block大小 MAC 大小 libsodium版本 AES-256-GCM 256 bits 96 bits 128 bits 128 bits libsodium &gt;= 1.0.4 but requires hardware support. IETF standard; also implemented in many other libraries. ChaCha20-Poly1305 256 bits 64 bits 512 bits 128 bits libsodium &gt;= 0.6.0. Also implemented in {Libre,Open,Boring}SSL. ChaCha20-IETF-Poly1305 256 bits 96 bits 512 bits 128 bits libsodium &gt;= 1.0.4. IETF standard; also implemented in Ring, {Libre,Open,Boring}SSL and other libraries. XChaCha20-IETF-Poly1305 256 bits 192 bits 512 bits 128 bits libsodium &gt;= 1.0.12. 加密方式选择 AES-256-GCM 目前这种结构支持硬件加速，需要Intel SSSE3扩展，以及 aesni 和 pclmul。官方暂无计划将AES-256-GCM通过非硬件技术(即软件层)来实现。 英特尔Westmere处理器（2010年推出）和更新版符合要求，没有计划支持AES-GCM的非硬件加速实现，因为在软件实现中正确减少侧通道伴随着主要的速度权衡，这使得AES-GCM的整个点超过了ChaCha20-Poly1305。 XChaCha20-IETF-Poly1305 Xchacha20-poly1305-ietf 兼容安全与速度，在没有AES指令集的设备上表现良好。 XChaCha20-Poly1305继承了ChaCha20-Poly1305所有优势并将随机文件nonce大小扩展到192位。这种扩展的随机数大小允许安全使用随机数。libsodium中的XChaCha20-Poly1305实现可在所有支持的体系结构中移植。 TipsChaCha20-Poly1305虽然AES-256-GCM在专用硬件上速度非常快，但在非专用硬件上性能要低得多。并且, AES容易受到缓存冲突时间的攻击。 ChaCha20在纯软件方面加密就比AES快得多，在缺乏专用AES硬件的平台上速度比其快三倍。 并且, ChaCha20对定时攻击也不敏感。 Poly1305是一种高速信息验证码。ChaCha20流密码+Poly1305认证的组合的使得其成为了Salsa20-Poly1305加密方式的替代品。其于2015年5月成为IETF官方标准，所以目前很多主流操作系统均以支持ChaCha20-Poly1305。 参考链接https://download.libsodium.org/doc/]]></content>
       <categories>
         <category>技术</category>
@@ -14,7 +26,7 @@
   </entry>
   <entry>
     <title><![CDATA[Danteded Socks5 一键安装脚本]]></title>
-    <url>%2Fposts%2FDanteded%20Socks5%20one-click%20installation%20script%2F</url>
+    <url>%2Fposts%2FDanteded-Socks5-one-click-installation-script%2F</url>
     <content type="text"><![CDATA[编译还是太麻烦了点，为了方便 telegram 看老司机们开车，就去 github 找了个一键脚本，telegram 的车再也不会错过了。 原地址 中文https://github.com/Lozy/danted/blob/master/README_CN.md 英文https://github.com/Lozy/danted/blob/master/README.md 一键脚本安装 下载 wget --no-check-certificate https://raw.github.com/Lozy/danted/master/install.sh -O install.sh 安装 bash install.sh --port=端口 --user=自己设置用户名 --passwd=设置密码 成功 Dante Server Install Successfuly! 使用说明 命令参数 /etc/init.d/danted {start|stop|restart|status|add|del} 重启sock5 /etc/init.d/danted restart 或者 service danted restart 关闭sock5 /etc/init.d/danted stop 或者 service danted stop 开启sock5 /etc/init.d/danted start 或者 service danted start 查看sock5状态 /etc/init.d/danted status 或者 service danted status 添加SOCK5 PAM用户/修改密码 /etc/init.d/danted add 用户名 密码 删除SOCK5 PAM用户 /etc/init.d/danted del 用户名 配置文件路径/etc/danted/conf/ 日志记录路径 /var/log/danted.*.log danted 帮助命令 danted –help 根据上述产生的 socks5 代理地址如果你在 Telegram 使用的话，直接产生下面的链接就行了 https://t.me/socks?server=你的VPS IP地址&amp;port=端口&amp;user=用户名&amp;pass=密码 删除Dantedservice danted stop rm -rf /etc/danted/ rm -f /etc/init.d/danted]]></content>
       <categories>
         <category>技术</category>
@@ -25,7 +37,7 @@
   </entry>
   <entry>
     <title><![CDATA[Linux搭建Socks5代理]]></title>
-    <url>%2Fposts%2FLinux%20build%20Socks5%20agent%2F</url>
+    <url>%2Fposts%2FLinux-build-Socks5-agent%2F</url>
     <content type="text"><![CDATA[为了能够更好的看老司机开车，编译安装socks5代理(linux) Socks5 SS5 官方网站 1.安装一些依赖组件 yum install gcc openldap-devel pam-devel openssl-devel 2.下载SS5最新版本的源代码 wget http://jaist.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz 3.解压后开始编译安装 tar zxvf ./ss5-3.8.9-8.tar.gz cd ss5-3.8.9 ./configure make make install 4.赋予脚本权限 chmod +x /etc/init.d/ss5 5.修改 socks5 配置文件，放开 auth 和 permit 注释 vi /etc/opt/ss5/ss5.conf # 如果需要配置访问权限 auth 0.0.0.0/0 - u permit u 0.0.0.0/0 - 0.0.0.0/0 - - - - - 修改用户密码 vi /etc/opt/ss5/ss5.passwd # 格式为 用户名 密码 username password #例如 user1 123 修改端口 vi /etc/sysconfig/ss5 # SS5_OPTS=&quot; -u root -b 0.0.0.0:8080&quot; 启动服务 service ss5 start 6.随系统启动 chkconfig --add ss5 chkconfig --level 345 ss5 on chkconfig --list | grep ss5]]></content>
       <categories>
         <category>技术</category>

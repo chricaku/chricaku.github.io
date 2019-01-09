@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="为了能够更好的看老司机开车，编译安装socks5代理(linux)">
+  <meta name="description" content="编译还是太麻烦了点，为了方便 telegram 看老司机们开车，就去 github 找了个一键脚本，telegram 的车再也不会错过了。">
 <meta name="keywords" content="Socks5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux搭建Socks5代理">
-<meta property="og:url" content="https://chrica.me/posts/Linux build Socks5 agent/index.html">
+<meta property="og:title" content="Danteded Socks5 一键安装脚本">
+<meta property="og:url" content="https://chrica.me/posts/Danteded-Socks5-one-click-installation-script/index.html">
 <meta property="og:site_name" content="Chrica">
-<meta property="og:description" content="为了能够更好的看老司机开车，编译安装socks5代理(linux)">
+<meta property="og:description" content="编译还是太麻烦了点，为了方便 telegram 看老司机们开车，就去 github 找了个一键脚本，telegram 的车再也不会错过了。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-14T07:58:10.116Z">
+<meta property="og:updated_time" content="2019-01-09T04:33:02.193Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux搭建Socks5代理">
-<meta name="twitter:description" content="为了能够更好的看老司机开车，编译安装socks5代理(linux)">
+<meta name="twitter:title" content="Danteded Socks5 一键安装脚本">
+<meta name="twitter:description" content="编译还是太麻烦了点，为了方便 telegram 看老司机们开车，就去 github 找了个一键脚本，telegram 的车再也不会错过了。">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chrica.me/posts/Linux build Socks5 agent/"/>
+  <link rel="canonical" href="https://chrica.me/posts/Danteded-Socks5-one-click-installation-script/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>Linux搭建Socks5代理 | Chrica</title>
+  <title>Danteded Socks5 一键安装脚本 | Chrica</title>
   
 
 
@@ -344,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chrica.me/posts/Linux build Socks5 agent/">
+    <link itemprop="mainEntityOfPage" href="https://chrica.me/posts/Danteded-Socks5-one-click-installation-script/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chrica">
@@ -361,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux搭建Socks5代理
+          <h1 class="post-title" itemprop="name headline">Danteded Socks5 一键安装脚本
               
             
           </h1>
@@ -386,12 +386,24 @@
                 
               
 
-              <time title="创建时间：2018-12-14 15:00:46 / 修改时间：15:58:10" itemprop="dateCreated datePublished" datetime="2018-12-14T15:00:46+08:00">2018-12-14</time>
+              <time title="创建时间：2018-12-14 15:33:52" itemprop="dateCreated datePublished" datetime="2018-12-14T15:33:52+08:00">2018-12-14</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-09 12:33:02" itemprop="dateModified" datetime="2019-01-09T12:33:02+08:00">2019-01-09</time>
               
             
           </span>
@@ -436,7 +448,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">741</span>
+                <span title="本文字数">1.1k</span>
               
 
               
@@ -470,51 +482,39 @@
       
 
       
-        <p>为了能够更好的看老司机开车，编译安装socks5代理(linux)<br><a id="more"></a></p>
-<blockquote>
-<p><strong>Socks5 </strong></p>
-<p><a href="http://ss5.sourceforge.net/" target="_blank" rel="noopener">SS5 官方网站</a></p>
-</blockquote>
-<p>1.安装一些依赖组件</p>
-<pre><code>yum install gcc openldap-devel pam-devel openssl-devel
-</code></pre><p>2.下载SS5最新版本的源代码</p>
-<pre><code>wget http://jaist.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz
-</code></pre><p>3.解压后开始编译安装</p>
-<pre><code>tar zxvf ./ss5-3.8.9-8.tar.gz
-cd ss5-3.8.9
-./configure
-make
-make install
-</code></pre><p>4.赋予脚本权限</p>
-<pre><code>chmod +x /etc/init.d/ss5
-</code></pre><p>5.修改 socks5 配置文件，放开 auth 和 permit 注释</p>
-<pre><code>vi /etc/opt/ss5/ss5.conf
-
-# 如果需要配置访问权限
- auth 0.0.0.0/0 - u
- permit u 0.0.0.0/0 - 0.0.0.0/0 - - - - -
-</code></pre><ul>
-<li><p>修改用户密码</p>
-<pre><code>vi /etc/opt/ss5/ss5.passwd
-# 格式为 用户名 密码
-username password
-#例如
-user1 123
-</code></pre></li>
-<li><p>修改端口</p>
-<pre><code>vi /etc/sysconfig/ss5
-# SS5_OPTS=&quot; -u root -b 0.0.0.0:8080&quot;
-</code></pre></li>
+        <p>编译还是太麻烦了点，为了方便 telegram 看老司机们开车，就去 github 找了个一键脚本，telegram 的车再也不会错过了。<br><a id="more"></a></p>
+<h1 id="原地址"><a href="#原地址" class="headerlink" title="原地址"></a>原地址</h1><ul>
+<li>中文<a href="https://github.com/Lozy/danted/blob/master/README_CN.md" target="_blank" rel="noopener">https://github.com/Lozy/danted/blob/master/README_CN.md</a></li>
+<li>英文<a href="https://github.com/Lozy/danted/blob/master/README.md" target="_blank" rel="noopener">https://github.com/Lozy/danted/blob/master/README.md</a></li>
 </ul>
-<ul>
-<li><p>启动服务</p>
-<pre><code>service ss5 start
+<h1 id="一键脚本安装"><a href="#一键脚本安装" class="headerlink" title="一键脚本安装"></a>一键脚本安装</h1><ul>
+<li><p>下载</p>
+<pre><code>wget --no-check-certificate https://raw.github.com/Lozy/danted/master/install.sh -O install.sh
 </code></pre></li>
+<li><p>安装</p>
+<pre><code>bash install.sh  --port=端口 --user=自己设置用户名 --passwd=设置密码
+</code></pre></li>
+<li><p>成功</p>
+<pre><code>Dante Server Install Successfuly!
+</code></pre><h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1></li>
 </ul>
-<p>6.随系统启动</p>
-<pre><code>chkconfig --add ss5
-chkconfig --level 345 ss5 on
-chkconfig --list | grep ss5
+<ol>
+<li>命令参数 /etc/init.d/danted {start|stop|restart|status|add|del}</li>
+<li>重启sock5 /etc/init.d/danted restart 或者 service danted restart</li>
+<li>关闭sock5 /etc/init.d/danted stop 或者 service danted stop</li>
+<li>开启sock5 /etc/init.d/danted start 或者 service danted start</li>
+<li>查看sock5状态 /etc/init.d/danted status 或者 service danted status</li>
+<li>添加SOCK5 PAM用户/修改密码 /etc/init.d/danted add 用户名 密码</li>
+<li>删除SOCK5 PAM用户 /etc/init.d/danted del 用户名</li>
+<li>配置文件路径/etc/danted/conf/</li>
+<li>日志记录路径 /var/log/danted.*.log</li>
+<li>danted 帮助命令 danted –help</li>
+</ol>
+<p>根据上述产生的 socks5 代理地址如果你在 Telegram 使用的话，直接产生下面的链接就行了</p>
+<pre><code>https://t.me/socks?server=你的VPS IP地址&amp;port=端口&amp;user=用户名&amp;pass=密码
+</code></pre><h1 id="删除Danted"><a href="#删除Danted" class="headerlink" title="删除Danted"></a>删除Danted</h1><pre><code>service danted stop
+rm -rf /etc/danted/
+rm -f /etc/init.d/danted
 </code></pre>
       
     </div>
@@ -536,7 +536,7 @@ chkconfig --list | grep ss5
     <strong>本文作者： </strong>Chrica</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://chrica.me/posts/Linux build Socks5 agent/" title="Linux搭建Socks5代理">https://chrica.me/posts/Linux build Socks5 agent/</a>
+    <a href="https://chrica.me/posts/Danteded-Socks5-one-click-installation-script/" title="Danteded Socks5 一键安装脚本">https://chrica.me/posts/Danteded-Socks5-one-click-installation-script/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -562,8 +562,8 @@ chkconfig --list | grep ss5
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/shadowsocks-obfs-cloudflare/" rel="next" title="shadowsocks+obfs+cloudflare">
-                <i class="fa fa-chevron-left"></i> shadowsocks+obfs+cloudflare
+              <a href="/posts/Linux-build-Socks5-agent/" rel="next" title="Linux搭建Socks5代理">
+                <i class="fa fa-chevron-left"></i> Linux搭建Socks5代理
               </a>
             
           </div>
@@ -572,8 +572,8 @@ chkconfig --list | grep ss5
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/Danteded Socks5 one-click installation script/" rel="prev" title="Danteded Socks5 一键安装脚本">
-                Danteded Socks5 一键安装脚本 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/AEDE-algorithm-encryption/" rel="prev" title="AEDE算法加密-libsodium">
+                AEDE算法加密-libsodium <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,8 +628,17 @@ chkconfig --list | grep ss5
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -648,7 +657,7 @@ chkconfig --list | grep ss5
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -750,7 +759,9 @@ chkconfig --list | grep ss5
                     
                       
                     
-                    <span class="site-state-item-count">30</span>
+                      
+                    
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -791,6 +802,22 @@ chkconfig --list | grep ss5
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原地址"><span class="nav-number">1.</span> <span class="nav-text">原地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一键脚本安装"><span class="nav-number">2.</span> <span class="nav-text">一键脚本安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用说明"><span class="nav-number">3.</span> <span class="nav-text">使用说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除Danted"><span class="nav-number">4.</span> <span class="nav-text">删除Danted</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 <br>		
@@ -806,7 +833,7 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
@@ -818,7 +845,7 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">33k</span>
+    <span title="站点总字数">35k</span>
   
 
   
@@ -827,7 +854,7 @@ src="//music.163.com/outchain/player?type=2&id=16846091&auto=0&height=66"></ifra
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">30 分钟</span>
+    <span title="站点阅读时长">31 分钟</span>
   
 </div>
 
