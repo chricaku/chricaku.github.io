@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[解决Centos提示At-least-xMB-more-space-needed-on-the-/boot-filesystem的方法]]></title>
+    <url>%2Fposts%2FResolve-Disk-Requirements-At-least-xMB-more-space-needed-on-the-%2Fboot-filesystem%2F</url>
+    <content type="text"><![CDATA[Centos 终端输入 yum update 出现问题 Disk Requirements: At least 11MB more space needed on the / filesystem. linux 空间不够了，怎么办？ 升级下载内核 查看空间多少: df -h 查看当期内核: uname -r 查找内核: rpm -qa | grep kernel 删除多余的内核(根据实际情况): yum remove ************ 删除系统日志: rm -rf /var/log/* 删除 rm -rf /usr/local/src 注意这里可能存在你安装的文件(不建议操作) 选择新内核 系统里已经安装了最新的内核，但却没有适用 列出内核命令 awk -F\&apos; &apos;$1==&quot;menuentry &quot; {print i++ &quot; : &quot; $2}&apos; /boot/grub2/grub.cfg 如下 [root@host ~]# awk -F\&apos; &apos;$1==&quot;menuentry &quot; {print i++ &quot; : &quot; $2}&apos; /boot/grub2/grub.cfg 0 : CentOS Linux (4.20.2-1.el7.elrepo.x86_64) 7 (Core) 1 : CentOS Linux (4.19.6-1.el7.elrepo.x86_64) 7 (Core) 2 : CentOS Linux 7 Rescue afe1648ff2e4685a148863ca2b3856e6 (3.10.0-957.1.3.el7.x 86_64) 3 : CentOS Linux (3.10.0-957.1.3.el7.x86_64) 7 (Core) 4 : CentOS Linux (0-rescue-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb) 7 (Core) 确认内核（选择数字） #grub2-set-default 数字 grub2-set-default 0 确认 grub2-editenv list 重启 reboot]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[本地MySQL恢复阿里云RDS数据]]></title>
     <url>%2Fposts%2FLocal-MySQL-Restores-Alibaba-Cloud-RDS-Data%2F</url>
     <content type="text"><![CDATA[本地恢复RDS数据，查阅官方和网民的相关博客走了挺多的坑，完整恢复如下 在查询和统计导出过程中window电脑会爆内存，导出数据不完整。MAC电脑没有问题。 计算机配置 CPU: I5-6500 内存：16GB DDR4 硬盘：1T 数据量：300GB 工具 下载相应的数据库版本 RDS MySQL 使用开源软件 percona-Xtrabackup 对MySQL 数据库进行备份。需要下载该软件，然后使用该软件进行恢复。 下载percona-toolkit 下载解压工具 rds_backup_extract (sh 文件)，目前只支持 64 位 Linux 系统。 安装 创建data目录 mkdir -p /home/mysql/data 解压RDS备份文件 bash rds_backup_extract.sh -f &lt;数据备份文件名&gt;.tar.gz -C /home/mysql/data f 指定要解压的备份集文件# -C 指定解压到的目录；-C 参数是可选的，如果不指定就解压到当前目录，如 bash rds_backup_extract -f backup.tar.gz 安装Percona XtraBackup插件 yum install perl-DBI -y yum install perl-DBD-MySQL -y yum install perl-Time-HiRes -y yum install perl-IO-Socket-SSL –y yum install perl-TermReadKey.x86_64 -y yum install perl-Digest-MD5 -y 安装Percona XtraBackup tar xvf Percona-XtraBackup-8.0.4-rc2c0777-el7-x86_64-bundle.tar cd Percona-XtraBackup-8.0.4-rc2c0777-el7-x86_64-bundle cp bin/innobackupex /usr/bin cp bin/xtrabackup* /usr/bin 安装percona-toolkit rpm -ivh percona-toolkit-3.0.12-1.el7.x86_64.rpm 安装mysql因为RDS是5.6版本，所以本地的mysql数据库要与RDS版本对应。 rpm -ivh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm &amp;&amp; yum -y install mysql-server mysql 数据恢复 恢复解压好的备份文件 innobackupex --defaults-file=/home/mysql/data/backup-my.cnf --user=root --apply-log /home/mysql/data 显示 completed OK，即执行成功 打开/home/mysql/data/backup-my.cnf vi /home/mysql/data/backup-my.cnf 注释掉如下参数（阿里帮助文档只说注释掉三行，启动会失败。坑） #innodb_fast_checksum #innodb_page_size #innodb_log_block_size #innodb_log_checksum_algorithm=innodb #rds_encrypt_data=false #innodb_encrypt_algorithm=aes_128_ecb 修改文件夹所属用户为mysql chown -R mysql:mysql /home/mysql/data 启动mysql进程 mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data &amp; 查看进程 ps aux|grep mysqld 登录数据库 登录mysql查看数据，默认密码为空 myslq -uroot 使用-A参数，取消预读库中表信息了，提高连接库的速度. mysql -uroot -A 参考链接 RDS for MySQL 物理备份文件恢复到自建数据库 阿里云RDS数据恢复到本地MySQL数据库]]></content>
