@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MySQL8优化]]></title>
+    <url>%2Fposts%2FMysql8-optimization%2F</url>
+    <content type="text"><![CDATA[优化效果（从大到小）：硬件设备 -&gt; MySQL数据库 -&gt; Linux操作系统 -&gt; 表设计 经历了MySQL5.6、5.7数据库内存溢出导致被killed，硬件不变的条件下转战MySQL8自适应的数据库,保证在各种不同的服务器、虚拟机、容器下自动适配服务器资源 performance_schema如果我们的服务器内存比较小，可以关闭mysql的 performance_schema performance_schema=Off performance_schema 为 Off 的状态下为关闭性能模式 innodb_buffer_pool_size: innodb_dedicated_server 默认为Off当 innodb_dedicated_server 为 On时，开启自动调节内存大小,mysqld服务进程每次重启后都会自动调整上述三个参数值。如图表所示。 Detected Server Memory Buffer Pool Size &lt;1G 128MiB (the innodb_buffer_pool_size default) &lt;=4G Detected server memory * 0.5 &gt;4G Detected server memory * 0.75 innodb_buffer_pool_size 这个值可以手动调整，默认值 134217728 ，最小值 5242880 innodb_log_file_size: Detected Server Memory Buffer Pool Size &lt;1G 48M(innodb_dedicated_server=为OFF时的默认取值) &lt;=4G 128M &lt;=8G 512M &lt;=16G 1024M &gt;16G 2G innodb_flush_method:如果系统允许设置为O_DIRECT_NO_FSYNC。如果系统不允许，则设置为InnoDB默认的Flush method。 上述这些参数在MySQL每次启动时自动探测服务器（包括虚拟机和容器的内存）配置并自动生效。 优化一条SQL语句：1.表的数据类型是否设计得合理，数据类型越简单越小原则2.表中碎片整理 alter table comment_infos engine = innodb; 3.查看表的统计信息 select * from information_schema.tables where table_name=&quot;comment_infos&quot;\G; 4.explain查看执行计划5.建索引前查看该字段的选择性，越接近1越高，主键索引和唯一索引的选择性是16.在查看explain，对比索引效果。在合理的字段建立索引：经常出现在where后；经常order by或group by；经常表连接。 场景 适应场景 MySQL的服务器上是专门给MySQL提供服务的 不适应场景 单机多实例情况下不适应。 其他有特殊场景要求的不适用。比如：不是主要以InnoDB为存储引擎的；服务器上还有其他应用程序的等等。 innodb_dedicated_server=ON并不见得是最优的配置。例如，你用了MyISAM，MyRocks等其他存储引擎时，建议手工调整，而不是设置innodb_dedicated_server=ON XFS系统请手工设置inndob_flush_method=O_DIRECT。在inndob_flush_method=O_DIRECT_NO_FSYNC下，InnoDB使用O_DIRECT来刷新IO，但是跳过fsync()步骤。对某些文件系统有效，但是对XFS文件系统并不适用。为了保证文件的metadata刷新到磁盘中，XFS必须使用O_DIRECT。 具体情况，具体分析。 参考资料: https://mysqlserverteam.com/plan-to-improve-the-out-of-the-box-experience-in-mysql-8-0/ https://dev.mysql.com/doc/refman/8.0/en/innodb-dedicated-server.html https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[IOS助手破解软件]]></title>
     <url>%2Fposts%2FIos-software-assistant%2F</url>
     <content type="text"><![CDATA[可以下载修改软件，有企业证书的： Panda Helper：http://m.pandahelp.vip/regular Tweakboxapp：https://www.tweakboxapp.com 叉叉助手IPA版：http://ipa.xxzhushou.cn 点火：http://ignition.fun 无企业证书，下载正版软件的：PP助手，爱思助手]]></content>
@@ -218,9 +229,9 @@
         <category>书籍</category>
       </categories>
       <tags>
-        <tag>Social</tag>
         <tag>Reform</tag>
         <tag>GDP</tag>
+        <tag>Social</tag>
       </tags>
   </entry>
   <entry>
@@ -231,8 +242,8 @@
         <category>金融</category>
       </categories>
       <tags>
-        <tag>Stock</tag>
         <tag>Social</tag>
+        <tag>Stock</tag>
       </tags>
   </entry>
   <entry>
