@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[GCPAWS开启root登录]]></title>
+    <url>%2Fposts%2FGCP-AWS-with-root-login%2F</url>
+    <content type="text"><![CDATA[一些云服务商出于安全性考虑，将旗下 VPS 设为仅允许通过 SSH Key 登陆并禁用了 root 账户，例如 Amazon Web Services、Google Compute Engine。 其实，个人非生产环境并不需要这么严格的权限控制，下面是一些相关方案。 请注意，以下操作会降低登陆安全性，请自行斟酌是否开启。 在 CentOS、Debian、Ubuntu 测试通过，其他发行版可以参考以下步骤。 开启 root 账户并配置登录密码： # 切换到 root sudo -i cd /etc/ssh/ # 开启 root 登录 sed -i &apos;s/^.*PermitRootLogin.*/PermitRootLogin yes/g&apos; sshd_config # 开启密码认证 sed -i &apos;s/^.*PasswordAuthentication.*/PasswordAuthentication yes/g&apos; sshd_config # 设置 root 账户的新密码 passwd root # 重启服务 service sshd restart service ssh restart 开启 root 账户并配置 SSH Key： # 切换到 root sudo -i cd /etc/ssh/ # 开启 root 登录 sed -i &apos;s/^.*PermitRootLogin.*/PermitRootLogin yes/g&apos; sshd_config # 开启 Key 认证 sed -i &apos;s/^.*RSAAuthentication.*/RSAAuthentication yes/g&apos; sshd_config sed -i &apos;s/^.*PubkeyAuthentication.*/PubkeyAuthentication yes/g&apos; sshd_config cd ~ mkdir .ssh cd .ssh # 此处引号内替换为你的公钥 echo &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDO7wSG85qjN/J8Krf8lMjWJMsWZ6WGWSiTh0zMIt0OFK4/tu2U2wQxZfodYPGght3TiS1YdgZi8q9yaxvy2uSTgCVeSDHwZm3suuGA7ofshY6LNowI7DWJTOlJ3Z0u63bOslzxv2sIuFWndw4GHNn7MBF1CBE33GaGJ7Yx8thhAQ== SaintW&quot; &gt; authorized_keys chmod 600 authorized_keys cd ../ chmod 700 .ssh # 重启服务 service sshd restart service ssh restart]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>GCP</tag>
+        <tag>AWS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[斐讯N1-Openwrt]]></title>
     <url>%2Fposts%2FPHICOMM-N1-Openwrt%2F</url>
     <content type="text"><![CDATA[文章记录 https://www.oldsuperman.tk/index.php/2019/02/14/n1%E7%A7%91%E5%AD%A6%E7%BD%91%E5%85%B3%E5%81%9A%E6%B3%95/ https://pockies.github.io/2019/03/07/phicomm-n1/ https://pockies.github.io/2019/03/25/everaver-emby-kodi/ https://injoy.work/archives/398960e0.html https://injoy.work/ https://www.maxlicheng.com/embedded/36.html https://www.saintw.cc/753.html https://yuban10703.xyz/archives/406]]></content>
