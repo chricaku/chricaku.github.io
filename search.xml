@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CloudFlare-Worker-JSproxy]]></title>
+    <url>%2Fposts%2FCloudFlare-Worker-JSproxy%2F</url>
+    <content type="text"><![CDATA[https://chrica.scc.workers.dev/ 最近CloudFlare出了个Worker服务，这个东西可以开发出很多的玩法： 搭建博客（）搭建网页代理（就是我接下去要讲的。）and so on…… (等待大佬开发了。) cfworker 无服务器版 发布，长期使用演示服务的请使用该版本。 使用 CloudFlare Worker 免费部署 简介CloudFlare Worker 是 CloudFlare 的边缘计算服务。开发者可通过 JavaScript 对 CDN 进行编程，从而能灵活处理 HTTP 请求。这使得很多任务可在 CDN 上完成，无需自己的服务器参与。 部署首页：https://workers.cloudflare.com 注册，登陆，Start building，取一个子域名，Create a Worker。 复制 index.js 到左侧代码框，Save and deploy。如果正常，右侧应显示首页。 收藏地址框中的 https://xxxx.子域名.workers.dev，以后可直接访问。 第一步：创建一个Gthub储存库 登录https://github.com 去https://github.com/EtherDream/jsproxy 这里Fork大佬的项目 第二步：创建一个CloudFlare Workers项目 打开https://workers.cloudflare.com/ ，登陆后如果没玩过worker的会让你创建一个域名类似：xxx.workers.dev，想好这个“xxx”因为无法修改 创建一个项目，复制https://github.com/XXX/jsproxy/tree/master/cf-worker/index.js的代码到Workers工作台 注意修改链接XXX为自己的Github用户名 进入gh-pages分支，编辑conf.js文件然后修改默认那个cfworker的url为Workers应用的链接 再去https://github.com/XXX/jsproxy/tree/master/lua/http-enc-res-hdr.lua#L114打开上下三行的注释 同样注意修改链接XXX为自己的Github用户名 第三步：访问查看效果 访问访问https://xxxx.子域名.workers.dev预览。 计费后退到 overview 页面可参看使用情况。免费版每天有 10 万次免费请求，对于个人通常足够。 如果不够用，可注册多个 Worker，在 conf.js 中配置多线路负载均衡。或者升级到 $5 的高级版本，每月可用 1000 万次请求（超出部分 $0.5/百万次请求）。 如果远不够用，建议和服务器组合使用。因为 cfworker 是按请求次数计费的，所以小文件更适合通过服务器代理，大文件走 cfworker 才合算。可参考下面的 加速功能。 修改配置默认情况下，静态资源从 https://zjcqoo.github.io 反向代理，可通过代码中 ASSET_URL 配置，从而可使用自定义的 conf.js 配置。 加速功能如果你已有服务器，也可通过 CloudFlare Worker 分担大文件的代理。 前端修改：conf.js 的 cfworker 节点 lines 配置。 后端修改：lua/http-enc-res-hdr.lua 的 114-116 行 注释打开，重启服务生效。 可在 84行 处修改大于多少字节的静态资源走加速。 该功能目前还在实验中，有问题或者更好的思路可交流。 （推荐下行流量免费且不限速的服务器，可节省大量费用） 存在问题WebSocket 代理尚未实现外链限制尚未实现未充分测试，以后再完善 来源： https://github.com/EtherDream/jsproxy/tree/master/cf-worker]]></content>
+      <categories>
+        <category>Network</category>
+      </categories>
+      <tags>
+        <tag>CloudFlare</tag>
+        <tag>JSproxy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[GCPAWS开启root登录]]></title>
     <url>%2Fposts%2FGCP-AWS-with-root-login%2F</url>
     <content type="text"><![CDATA[一些云服务商出于安全性考虑，将旗下 VPS 设为仅允许通过 SSH Key 登陆并禁用了 root 账户，例如 Amazon Web Services、Google Compute Engine。 其实，个人非生产环境并不需要这么严格的权限控制，下面是一些相关方案。 请注意，以下操作会降低登陆安全性，请自行斟酌是否开启。 在 CentOS、Debian、Ubuntu 测试通过，其他发行版可以参考以下步骤。 开启 root 账户并配置登录密码： # 切换到 root sudo -i cd /etc/ssh/ # 开启 root 登录 sed -i &apos;s/^.*PermitRootLogin.*/PermitRootLogin yes/g&apos; sshd_config # 开启密码认证 sed -i &apos;s/^.*PasswordAuthentication.*/PasswordAuthentication yes/g&apos; sshd_config # 设置 root 账户的新密码 passwd root # 重启服务 service sshd restart service ssh restart 开启 root 账户并配置 SSH Key： # 切换到 root sudo -i cd /etc/ssh/ # 开启 root 登录 sed -i &apos;s/^.*PermitRootLogin.*/PermitRootLogin yes/g&apos; sshd_config # 开启 Key 认证 sed -i &apos;s/^.*RSAAuthentication.*/RSAAuthentication yes/g&apos; sshd_config sed -i &apos;s/^.*PubkeyAuthentication.*/PubkeyAuthentication yes/g&apos; sshd_config cd ~ mkdir .ssh cd .ssh # 此处引号内替换为你的公钥 echo &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDO7wSG85qjN/J8Krf8lMjWJMsWZ6WGWSiTh0zMIt0OFK4/tu2U2wQxZfodYPGght3TiS1YdgZi8q9yaxvy2uSTgCVeSDHwZm3suuGA7ofshY6LNowI7DWJTOlJ3Z0u63bOslzxv2sIuFWndw4GHNn7MBF1CBE33GaGJ7Yx8thhAQ== SaintW&quot; &gt; authorized_keys chmod 600 authorized_keys cd ../ chmod 700 .ssh # 重启服务 service sshd restart service ssh restart]]></content>
