@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[iPhoneiOS系统删除信任的残留证书]]></title>
+    <url>%2Fposts%2FiPhone-iOS-system-deletes-trusted-residual-certificate%2F</url>
+    <content type="text"><![CDATA[之前用Thor的HTTPS解密需要导入证书功能，但是换iPhone 8的时候，恢复备份之后发现证书所依赖的描述文件没有被恢复过来，但是信任证书居然还残留在里面删不掉，虽说忽略掉不打开信任开关也没问题，但是比较还是会逼死强迫症的。 开始爱思助手不行！ 使用 iTunes 或者 iMazing 将iPhone备份。（取消加密备份） iMazing &gt; 文件系统 &gt; 备份 &gt; KeychainDomain &gt; 找到 TrustStore.sqlite3 &gt; 拷贝到 ~/ 目录 前往 ADVTrustStore 下载 ADVTrustStore 用于编辑iOS CA证书 下载完成后，将 iosCertTrustManager.py 同样复制到 ~/ 由于 macOS 自带了 Python 所以可以直接在终端运行以下命令 图片 ./iosCertTrustManager.py -t ~/TrustStore.sqlite3 -e ~/foo.crt 如图所示，你可以看到 ADVTrustStore 重新生成了 WoSign CA Limited, CN 证书 如果你是Mac用户你可以直接试用 Airdrop 隔空投递 选中生成的证书，发送到iPhone进行安装。（你也可以使用Email发送到你的手机） Window用户安装Python，绑定路径 Linux用户同Mac方法 现在你可以到iPhone &gt; 设置 &gt; 通用 &gt; 描述文件 中找到并删除它。你可以惊奇地发现它在 证书信任设置 中消失了。 参考地址 https://apple.stackexchange.com/questions/300203/how-can-i-delete-a-certificate-that-got-restored-from-a-backup-under-ios-10-11]]></content>
+      <categories>
+        <category>Apple</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>iPhone</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[AWSLightsail开启root登陆权限适用于EC2GCPAZURE]]></title>
+    <url>%2Fposts%2FAWSLightsail-turns-on-root-login-for-EC2GCPAZURE%2F</url>
+    <content type="text"><![CDATA[对于EC2,GCE等机器也可以使用. 不能添加代码的机器,可以登录进ssh,再执行上面的代码. 也可以开启root登陆. 将下面代码中的第一句中的Chrica改为自己将要设置的密码. 否则默认root密码为Chrica 创建instance时,点击add launch script,将下列代码复制进去(注意更改root密码). \#!/bin/bash echo root:Chrica |sudo chpasswd root sudo sed -i &apos;s/^#\?PermitRootLogin`.*/PermitRootLogin yes/g&apos; /etc/ssh/sshd_config; sudo sed -i &apos;s/^#\?PasswordAuthentication.*PasswordAuthentication yes/g&apos; /etc/ssh/sshd_config; sudo reboot]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>GCP</tag>
+        <tag>AWS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CloudFlare-Worker-JSproxy]]></title>
     <url>%2Fposts%2FCloudFlare-Worker-JSproxy%2F</url>
     <content type="text"><![CDATA[https://chrica.scc.workers.dev/ 最近CloudFlare出了个Worker服务，这个东西可以开发出很多的玩法： 搭建博客（）搭建网页代理（就是我接下去要讲的。）and so on…… (等待大佬开发了。) cfworker 无服务器版 发布，长期使用演示服务的请使用该版本。 使用 CloudFlare Worker 免费部署 简介CloudFlare Worker 是 CloudFlare 的边缘计算服务。开发者可通过 JavaScript 对 CDN 进行编程，从而能灵活处理 HTTP 请求。这使得很多任务可在 CDN 上完成，无需自己的服务器参与。 部署首页：https://workers.cloudflare.com 注册，登陆，Start building，取一个子域名，Create a Worker。 复制 index.js 到左侧代码框，Save and deploy。如果正常，右侧应显示首页。 收藏地址框中的 https://xxxx.子域名.workers.dev，以后可直接访问。 第一步：创建一个Gthub储存库 登录https://github.com 去https://github.com/EtherDream/jsproxy 这里Fork大佬的项目 第二步：创建一个CloudFlare Workers项目 打开https://workers.cloudflare.com/ ，登陆后如果没玩过worker的会让你创建一个域名类似：xxx.workers.dev，想好这个“xxx”因为无法修改 创建一个项目，复制https://github.com/XXX/jsproxy/tree/master/cf-worker/index.js的代码到Workers工作台 注意修改链接XXX为自己的Github用户名 进入gh-pages分支，编辑conf.js文件然后修改默认那个cfworker的url为Workers应用的链接 再去https://github.com/XXX/jsproxy/tree/master/lua/http-enc-res-hdr.lua#L114打开上下三行的注释 同样注意修改链接XXX为自己的Github用户名 第三步：访问查看效果 访问访问https://xxxx.子域名.workers.dev预览。 计费后退到 overview 页面可参看使用情况。免费版每天有 10 万次免费请求，对于个人通常足够。 如果不够用，可注册多个 Worker，在 conf.js 中配置多线路负载均衡。或者升级到 $5 的高级版本，每月可用 1000 万次请求（超出部分 $0.5/百万次请求）。 如果远不够用，建议和服务器组合使用。因为 cfworker 是按请求次数计费的，所以小文件更适合通过服务器代理，大文件走 cfworker 才合算。可参考下面的 加速功能。 修改配置默认情况下，静态资源从 https://zjcqoo.github.io 反向代理，可通过代码中 ASSET_URL 配置，从而可使用自定义的 conf.js 配置。 加速功能如果你已有服务器，也可通过 CloudFlare Worker 分担大文件的代理。 前端修改：conf.js 的 cfworker 节点 lines 配置。 后端修改：lua/http-enc-res-hdr.lua 的 114-116 行 注释打开，重启服务生效。 可在 84行 处修改大于多少字节的静态资源走加速。 该功能目前还在实验中，有问题或者更好的思路可交流。 （推荐下行流量免费且不限速的服务器，可节省大量费用） 存在问题WebSocket 代理尚未实现外链限制尚未实现未充分测试，以后再完善 来源： https://github.com/EtherDream/jsproxy/tree/master/cf-worker]]></content>
@@ -265,9 +289,9 @@
         <category>Book</category>
       </categories>
       <tags>
-        <tag>Social</tag>
         <tag>Reform</tag>
         <tag>GDP</tag>
+        <tag>Social</tag>
       </tags>
   </entry>
   <entry>
@@ -278,8 +302,8 @@
         <category>Social</category>
       </categories>
       <tags>
-        <tag>Stock</tag>
         <tag>Social</tag>
+        <tag>Stock</tag>
       </tags>
   </entry>
   <entry>
