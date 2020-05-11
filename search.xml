@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Mysql常见问题]]></title>
+    <url>%2Fposts%2FMysql-FAQ%2F</url>
+    <content type="text"><![CDATA[安装不在讨论范围 Q1 ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: YES) 解析的地方有两处：①Access denied（拒绝访问）；②using password：NO/YES 1.解决方案： 找到/etc/mysql/mysql.conf.d/mysqld.cnf文件 输入命令vim /etc/mysql/mysql.conf.d/mysqld.cnf 在[mysqld]后添加skip-grant-tables [mysqld] skip-grant-tables （使用 set password for设置密码无效，且此后登录无需键入密码） 重启MySQL服务器 service mysql restart 登录MySQL服务器 12345mysql&gt; use mysql;mysql&gt; select User from user; #此处为查询用户命令mysql&gt; update user set password=password("你的新密码") where user="用户名"mysql&gt; flush privileges; #立即生效mysql&gt; quit; Q2 ERROR 1054(42S22) Unknown column ‘password’ in ‘field list’当你修改密码数可以会出现报错：ERROR 1054(42S22) Unknown column ‘password’ in ‘field list’1.错误的原因是 5.7版本下的mysql数据库下已经没有password这个字段了，password字段改成了authentication_string 2.将上述命令： 1mysql&gt; update user set password=password("你的新密码") where user="用户名" 改成： 1mysql&gt; update mysql.user set authentication_string=password('你的新密码') where user='用户名; #修改密码成功 其他命令一样按照顺序输入即可 Q3 mysql：1130 - Host ‘1.1.1.1’is not allowed to connect to this MariaDB server没有远程登录权限 则需要 登录mysql 修改mysql库中的user表：（”%”表示root可以由任意主机登录Mysql）执行下列命令： 12345mysql -u root -puse mysql;grant all privileges on *.* to root@'%' identified by "password";flush privileges;exit; password记得替换自己的密码 或者 退出登录Mysql,重启Mysql服务 service MySQL restart 别忘了; Q4 2003: Can’t connect to MySQL server on ‘192.168.1.20’ (10060”Unknown error”) 如 AWS、腾讯云、阿里云等添加安全组放行端口（略） iptables 放行端口 iptables -I INPUT -p tcp --dport 3306 -j ACCEPT]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[CentOS7下配置iptables]]></title>
+    <url>%2Fposts%2FCentOS7-with-iptables%2F</url>
+    <content type="text"><![CDATA[iptables是Linux下自带的一款免费且优秀的基于包过滤的防火墙工具，他的功能十分强大，使用也非常灵活，可以对流入、流出、流经服务器的数据包进行精细的控制 CentOS 7.x 使用iptables开放3306端口访问 安装CentOS 7.x 默认使用的是firewall作为防火墙，这里改为iptables防火墙。 1、关闭firewall： systemctl stop firewalld.service systemctl disable firewalld.service systemctl mask firewalld.service 2、安装iptables防火墙 yum install iptables-services -y 3、启动设置防火墙 systemctl enable iptables systemctl start iptables 4、查看防火墙状态 systemctl status iptables 5、编辑防火墙，增加端口 vi /etc/sysconfig/iptables #编辑防火墙配置文件 -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT :wq! #保存退出 5-1、命令编辑防火墙，增加端口 iptables -I INPUT -p tcp --dport 22 -j ACCEPT iptables -I INPUT -p tcp --dport 80 -j ACCEPT iptables -I INPUT -p tcp --dport 443 -j ACCEPT iptables -I INPUT -p udp --dport 443 -j ACCEPT iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save 6、重启配置，重启系统 systemctl restart iptables.service #重启防火墙使配置生效 systemctl enable iptables.service #设置防火墙开机启动 关闭SELinux 查看 [root@server ~]# getenforce Disabled [root@server ~]# /usr/sbin/sestatus -v SELinux status: disabled 永久关闭 vi /etc/selinux/config 将SELINUX=enforcing改为SELINUX=disabled 设置后需要重启才能生效 常用命令iptables -h #查询帮助 iptables -L -n #列出（filter表）所有规则 iptables -L -n --line-number #列出（filter表）所有规则，带编号 iptables -L -n -t nat #列出（nat表）所有规则 iptables -F #清除（filter表）中所有规则 iptables -F -t nat #清除（nat表）中所有规则 service iptables save #保存配置（保存配置后必须重启iptables） systemctl restart iptables.service #重启 语法 filter表解析filter表是iptables默认使用的表，负责对流入、流出本机的数据包进行过滤，该表中定义了3个链，分别是：INPUT、OUTPUT、FORWARD INPUT：过滤进入主机的数据包 OUTPUT：处理从本机出去的数据包 FORWARD：负责转发流经本机但不进入本机的数据包，起到转发作用 iptables常用语法 -A：追加到规则的最后一条 -D：删除记录 -I：添加到规则的第一条 -p：（proto）规定通信协议，常见的协议有：tcp、udp、icmp、all -j：（jump）指定要跳转的目标，常见的目标有：ACCEPT（接收数据包）、DROP（丢弃数据包）、REJECT（重定向）三种，但是一般不适用重定向，会带来安全隐患 常见案例 IP过滤禁止192.168.1.3 IP地址的所有类型数据接入 iptables -A INPUT ! -s 192.168.1.3 -j DROP 开放端口 iptables -A INPUT -p tcp --dport 80 -j ACCEPT #开放80端口 开放端口范围 iptables -I INPUT -p tcp --dport 22:80 -j ACCEPT #开发22-80范围的端口 不允许80端口流出 iptables -I OUTPUT -p tcp --dport 80 -j DROP]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[20191031-WIN10添加共享打印机出现0x000004f8-0x000003e3解决方法]]></title>
+    <url>%2Fposts%2FWIN10-add-shared-printer-appears-0x000004f8-0x000003e3-solution%2F</url>
+    <content type="text"><![CDATA[微软安全更新后打印机就打印不了，提示更新打印机驱动同时怎么也更新不了驱动 0x000004f8原因：“启用不安全的来宾登录”选项未配置 操作方法： 按window+R键输入gpedit.msc 来启动本地组策略编辑器 找到“计算机配置-管理模板-网络-Lanman工作站”这个节点 在右侧内容区可以看到“启用不安全的来宾登录” 双击“启用不安全的来宾登录”这一条策略设置，将其状态修改为“已启用”并单击确定按钮。 然后重新尝试连接共享打印机即可。 图文链接参考 https://blog.csdn.net/dingk1995/article/details/99732570 0x000003e3操作方法： 鼠标点击桌面左下角的开始按钮，在搜索程序和文件框或运行里面输入：gpedit.msc，然后按回车键。 在本地组策略编辑器窗口，计算机配置-Windows设置-安全设置-本地策略-安全选项，点击安全选项后在右边找到【账户：使用空密码的本地账户只允许进行控制台登录】，双击这个选项。 双击进去后，勾选【已禁用】，然后点击【确定】 按 win+x 计算机管理界面，系统工具-本地用户和组-用户，点击用户后在右边双击Guest 在Guest属性窗口，点击【隶属于】选项卡，在下面点击【添加】 在输入对象名称来选择框里面输入：users，然后点击【确定】 回到Guest属性窗口，在隶属于列表里面加入了users组，点击下面的【确定】。 设置好后到需要打印的电脑里面去添加打印机，如果还是连接不了，重启电脑后再添加。 图文链接参考 https://www.kddf.com/zx/47482.html]]></content>
+      <categories>
+        <category>Microsoft</category>
+      </categories>
+      <tags>
+        <tag>Window10</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Debian9设置SSH允许Root登录]]></title>
+    <url>%2Fposts%2FDebian9-set-SSH-to-allow-root-login%2F</url>
+    <content type="text"><![CDATA[物理机/ISO安装玩Debian9之后，远程shell可以用非Root账户登陆，但是用Root账户的话会始终提示密码错误！我先用putty用普通账号登陆Debian9然后su root切换过去以超级用户身份编辑ssh_config配置文件，重启ssh服务器之后就能正常用root账户登陆了； 安装SSH服务：如果没有安装SSH服务的话，需要先在Debian服务器上安装 apt-get install ssh 编辑sshd_config配置文件：vi /etc/ssh/sshd_config 找到#PermitRootLogin prohibit-password改为PermitRootLogin yes 重启SSH服务命令：/etc/init.d/ssh restart [ ok ] Restarting ssh (via systemctl): ssh.service.]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Debian</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[iPhoneiOS系统删除信任的残留证书]]></title>
     <url>%2Fposts%2FiPhone-iOS-system-deletes-trusted-residual-certificate%2F</url>
     <content type="text"><![CDATA[之前用Thor的HTTPS解密需要导入证书功能，但是换iPhone 8的时候，恢复备份之后发现证书所依赖的描述文件没有被恢复过来，但是信任证书居然还残留在里面删不掉，虽说忽略掉不打开信任开关也没问题，但是比较还是会逼死强迫症的。 开始爱思助手不行！ 使用 iTunes 或者 iMazing 将iPhone备份。（取消加密备份） iMazing &gt; 文件系统 &gt; 备份 &gt; KeychainDomain &gt; 找到 TrustStore.sqlite3 &gt; 拷贝到 ~/ 目录 前往 ADVTrustStore 下载 ADVTrustStore 用于编辑iOS CA证书 下载完成后，将 iosCertTrustManager.py 同样复制到 ~/ 由于 macOS 自带了 Python 所以可以直接在终端运行以下命令 图片 ./iosCertTrustManager.py -t ~/TrustStore.sqlite3 -e ~/foo.crt 如图所示，你可以看到 ADVTrustStore 重新生成了 WoSign CA Limited, CN 证书 如果你是Mac用户你可以直接试用 Airdrop 隔空投递 选中生成的证书，发送到iPhone进行安装。（你也可以使用Email发送到你的手机） Window用户安装Python，绑定路径 Linux用户同Mac方法 现在你可以到iPhone &gt; 设置 &gt; 通用 &gt; 描述文件 中找到并删除它。你可以惊奇地发现它在 证书信任设置 中消失了。 参考地址 https://apple.stackexchange.com/questions/300203/how-can-i-delete-a-certificate-that-got-restored-from-a-backup-under-ios-10-11]]></content>
